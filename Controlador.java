@@ -1,4 +1,4 @@
-package trenes;
+package Trenes;
 
 
 /*
@@ -6,7 +6,16 @@ package trenes;
  para que se adapte al estándar. 
  -Christian-
  */
-
+/*
+ Modificación Calidad: 
+ 	CORREGIDO CONCEPTO ERRÓNEO DE CONSTRUCTOR.
+ 		(en serio alguien confunde un setter con un constructor??)
+ 	Corregido el espaciado de métodos, llaves y operadores.
+ 	Correcciones para seguir el estandar:
+ 		Corregido nombre de paquete en minúscula.
+ 		Corregido nombres de métodos (actualizarInterfaz, actualizarMapa).
+ -Héctor-
+ */
 
 
 
@@ -15,57 +24,63 @@ package trenes;
  * @version 1.0
 */
 public class Controlador {
-	private static Controlador elControlador;
+	private static Controlador controlador;
+	
 	/**
 	 * Metodo que crea un controlador estatico         
-	 * @return elControlador           
+	 * @return controlador           
 	 */
-	public static Controlador setELControlador(){
-		if (elControlador==null){
-			elControlador=new Controlador();
+	public Controlador() {
+		if (controlador == null) {
+			controlador = new Controlador();
 		}
-		return elControlador;
 	}
+	
 	//Metodos para la creacion y gestion de la ventana principal
 	/**
 	 * Metodo que crea la ventana principal de la aplicacion
 	 */
-	void crearVentanaPrincipal(){
+	void crearVentanaPrincipal() {
 		
 	}
+	
 	//Metodos para la actualizacion de la interfaz y el mapa
 	/**
 	 * Metodo que actualiza el mapa grafico
 	 */
-	private void actualizaMapa(){
+	private void actualizarMapa() {
 		
 	}
+	
 	/**
 	 * Metodo que actualiza la interfaz de usuario
 	 */
-	private void actualizaInterfaz(){
+	private void actualizarInterfaz() {
 		
 	}
+	
 	//Metodos diversos para la gestion del trafico de datos entre el modulo y la interfaz
 	/**
 	 * metodo que llama a crear tren con los datos pasados por la interfaz
 	 * @param
 	 */
-	private void crearTren(){
+	private void crearTren() {
 		
 	}
+	
 	/**
 	 * metodo que llama a modificar tren con los datos pasados por la interfaz
 	 * @param
 	 */
-	private void modificarTren(){
+	private void modificarTren() {
 		
 	}
+	
 	/**
 	 * metodo que llama a eliminar tren con los datos pasados por la interfaz
 	 * @param
 	 */
-	private void eliminarTren(){
+	private void eliminarTren() {
 		
 	}
 	
