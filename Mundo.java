@@ -8,6 +8,7 @@ import Command.Command;
 import Entidad.Entidad;
 
 public class Mundo {
+	// prueba
 	private Entidad[] entidades;
 	private char[][] estadoMundo;
 	private Command comandos;
