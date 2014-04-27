@@ -1,6 +1,4 @@
-/**
- * Autores: Andrea, María y Wei
- * */
+package Entidad;
 
 public enum EstadoSenal {
 	VERDE, ROJO

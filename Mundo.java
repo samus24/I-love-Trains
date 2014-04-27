@@ -4,14 +4,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import Command.Command;
-import Entidad.Entidad;
+
+import Entidad.Senal;
+import Entidad.Tren;
 
 public class Mundo {
-	private Entidad[] entidades;
+	private Tren[] trenes;
+	private Senal[] senales;
 	private char[][] estadoMundo;
-	private Command comandos;
-	private static  final  int DIM = 60;
+	private static final  int DIM = 60;
 	public void main(String[] args) {
 		try {
 			InputStream mapa = new FileInputStream("mapa(txt).txt");
@@ -21,22 +22,15 @@ public class Mundo {
 			e.printStackTrace();
 		}
 		while(true){
-			ConsultarIntenciones();
-			interaciones();
-			mostrarMapa();
+			recalcularEstadoTrenes();
 		}
 		
 		
 	}
-	public void ConsultarIntenciones(){
-		/*Recopilar el comando ejecutado*/
-	}
-	public void interaciones(){
-		/*recopilar interaciones de las entidades*/
-	}
-	public void recalcularEstado(){
-		for(Entidad e: entidades){
-			 e.update();
+	
+	public void recalcularEstadoTrenes(){
+		for(Tren e: trenes){
+			 e.avanza(senales);
 		}
 	}
 	public void mostrarMapa(){
@@ -49,11 +43,17 @@ public class Mundo {
 			System.out.println("");
 		}
 	}
-	public Entidad[] getEntidades() {
-		return entidades;
+	public Senal[] getSenales() {
+		return senales;
 	}
-	public void setEntidades(Entidad[] _entidades) {
-		entidades = _entidades;
+	public void setSenal(Senal senal, int i) {
+		senales[i] = senal;
+	}
+	public Tren[] getTrenes() {
+		return trenes;
+	}
+	public void setTren(Tren _trenes, int i) {
+		trenes[i] = _trenes;
 	}
 	public char[][] getEstadoMundo() {
 		return estadoMundo;
