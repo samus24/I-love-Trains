@@ -79,7 +79,7 @@ public class Principal implements ActionListener
 		return panel;
 	}
 	
-	private static void crearYMostrarGUI() {
+	public static void crearYMostrarGUI() {
 		JFrame frame = new JFrame("Interfaz IS");
 		Principal principal = new Principal();
 		
@@ -92,7 +92,7 @@ public class Principal implements ActionListener
 		frame.setVisible(true);
 	} 
 	
-	private JPanel crearPanel(Color color, int x, int y)
+	public JPanel crearPanel(Color color, int x, int y)
 	{
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(x, y));
