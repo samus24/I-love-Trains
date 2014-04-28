@@ -9,7 +9,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		Mundo modelo = new Mundo();
 		Principal vista= new Principal();
-		Controlador controler= new Controlador(modelo, vista);
+		Controlador control= new Controlador(modelo, vista);
 		do{
 			// Ejecucion del programa; Vista en ejecucion			
 		}while(!modelo.isQuit()); //mientras no termine la ejecucion
