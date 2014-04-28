@@ -1,10 +1,12 @@
-package def;
+package controlador;
 
-public class suejtoVista 
+import modelo.*;
+
+public class sujetoVista 
 {
 	// Atributos
-    tren misTrenes[];
-    señales misSeñales[];
+    Tren misTrenes[];
+    Senal misSe�ales[];
 	//observadores misObservadores[]; mejor usar ArrayList
     ArrayList<Observador> misObservadores;
     // SOLO DEL MUNDO

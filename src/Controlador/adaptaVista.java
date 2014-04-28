@@ -1,4 +1,4 @@
-package def;
+package controlador;
 
 public class adaptaVista 
 {
@@ -6,7 +6,7 @@ public class adaptaVista
 	 {
 		 // ¿qué formato tiene esa String?
 	 }
-	 void adaptaSeñal(String miSeñal) // Recibe el String de la interfaz y lo transforma en datos legibles por el mundo (básicamente para el método creaSeñal())
+	 void adaptaSe�al(String miSe�al) // Recibe el String de la interfaz y lo transforma en datos legibles por el mundo (básicamente para el método creaSeñal())
 	 {
 		 // ¿qué formato tiene esa String?
 	 }

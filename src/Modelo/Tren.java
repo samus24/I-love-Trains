@@ -1,4 +1,4 @@
-package Entidad;
+package modelo;
 
 import java.util.ArrayList;
 
@@ -25,10 +25,6 @@ public class Tren{
 			numVagones++;
 		}
 	}
-	
-	
-	
-	
 	
 	public int  getVagones(){		
 		return numVagones;
@@ -81,10 +77,10 @@ public class Tren{
 		}
 		if(!enc){
 			switch(trayecto){
-			case HorizontalDer: coordenadaActual.setX(coordenadaActual.getCordenadaX() + 1);break;
-			case HorizontalIzq: coordenadaActual.setX(coordenadaActual.getCordenadaX() - 1);break;
-			case VerticalArr:coordenadaActual.setY(coordenadaActual.getCordenadaY() + 1);break;
-			case VerticalAba:coordenadaActual.setY(coordenadaActual.getCordenadaY() - 1);
+			case HorizontalDer: coordenadaActual.setX(coordenadaActual.getCoordenadaX() + 1);break;
+			case HorizontalIzq: coordenadaActual.setX(coordenadaActual.getCoordenadaX() - 1);break;
+			case VerticalArr:coordenadaActual.setY(coordenadaActual.getCoordenadaY() + 1);break;
+			case VerticalAba:coordenadaActual.setY(coordenadaActual.getCoordenadaY() - 1);
 			}
 		}
 		

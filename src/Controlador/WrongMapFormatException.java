@@ -1,4 +1,4 @@
-package World.Exceptions;
+package controlador;
 
 @SuppressWarnings("serial")
 public class WrongMapFormatException extends Exception{

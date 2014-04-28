@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controlador.Controlador;
+
 
 public class Trenes implements ActionListener
 {
@@ -24,6 +26,7 @@ public class Trenes implements ActionListener
 	private JLabel titulo;
 	private JLabel tren;
 	private JButton crear;
+	private Controlador controlador;
 	
 	public Trenes()
 	{
@@ -95,18 +98,21 @@ public class Trenes implements ActionListener
 	{
 		if ( e.getSource() == eliminar )
 		{
+			controlador.eliminarTren();//if(si tira error, mostrarlo con un system.err)
 			JFrame frame = new JFrame();
-			JOptionPane.showMessageDialog(frame,"TREN ELIMINADO", "ATENCION!!",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(frame,"TREN ELIMINADO", "ATENCION!!",JOptionPane.WARNING_MESSAGE);	
 		}
 		
 		if ( e.getSource() == crear )
 		{
+			controlador.crearTren();
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,"TREN CREADO","Informacion",JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		if ( e.getSource() == cambiar )
 		{
+			controlador.modificarTren();
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,"TREN MODIFICADO","Informacion",JOptionPane.INFORMATION_MESSAGE);
 		}

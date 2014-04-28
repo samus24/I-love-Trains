@@ -1,10 +1,14 @@
-package def;
+package controlador;
+
+import java.util.ArrayList;
+
+import modelo.*;
 
 public class sujetoMundo 
 {
 	// Atributos
-    tren misTrenes[];
-    señales misSeñales[];
+    Tren misTrenes[];
+    Senal misSenales[];
 //    observadores misObservadores[];
     ArrayList<Observador> misObservadores;
     // SOLO DEL MUNDO

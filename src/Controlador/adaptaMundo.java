@@ -1,4 +1,4 @@
-package def;
+package controlador;
 
 public class adaptaMundo 
 {

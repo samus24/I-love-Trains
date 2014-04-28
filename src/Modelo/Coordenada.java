@@ -1,4 +1,4 @@
-package Entidad;
+package modelo;
 
 /**
 *	Comprobado por Ignacio Rocillo

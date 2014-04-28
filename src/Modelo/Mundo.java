@@ -1,12 +1,10 @@
-package World;
+package modelo;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-
-import Entidad.Senal;
-import Entidad.Tren;
+import controlador.CargarMundo;
 
 /**
 	Corrección por Ignacio Rocillo

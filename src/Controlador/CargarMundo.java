@@ -1,14 +1,9 @@
-package World;
+package controlador;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
-import Entidad.Coordenada;
-import Entidad.EstadoSenal;
-import Entidad.Senal;
-import Entidad.Trayecto;
-import Entidad.Tren;
-import World.Exceptions.WrongMapFormatException;
+import modelo.*;
 
 public class CargarMundo {
 	
@@ -84,8 +79,8 @@ public class CargarMundo {
 	}
 	private void agregarTrayecto(){
 		for(Tren e : _trenes ){
-			int row = e.getCoordenadaInicio().getCordenadaY();
-			int colum = e.getCoordenadaInicio().getCordenadaX();
+			int row = e.getCoordenadaInicio().getCoordenadaY();
+			int colum = e.getCoordenadaInicio().getCoordenadaX();
 			boolean hayVia = true;
 			boolean encFinal = false;
 			while(hayVia && colum < DIM && !encFinal){
@@ -97,7 +92,7 @@ public class CargarMundo {
 					e.setTrayecto(Trayecto.HorizontalDer);
 				}	
 			}
-			colum = e.getCoordenadaInicio().getCordenadaX();
+			colum = e.getCoordenadaInicio().getCoordenadaX();
 			while(hayVia && colum > 0 && !encFinal){
 				colum--;
 				if(tablero[colum][row] != via){
@@ -107,7 +102,7 @@ public class CargarMundo {
 					e.setTrayecto(Trayecto.HorizontalIzq);
 				}	
 			}
-			colum = e.getCoordenadaInicio().getCordenadaX();
+			colum = e.getCoordenadaInicio().getCoordenadaX();
 			while(hayVia && row > 0 && !encFinal){
 				row--;
 				if(tablero[colum][row] != via){
@@ -117,8 +112,8 @@ public class CargarMundo {
 					e.setTrayecto(Trayecto.VerticalArr);
 				}	
 			}
-			colum = e.getCoordenadaInicio().getCordenadaX();
-			row = e.getCoordenadaInicio().getCordenadaY();
+			colum = e.getCoordenadaInicio().getCoordenadaX();
+			row = e.getCoordenadaInicio().getCoordenadaY();
 			while(hayVia && row < DIM && !encFinal){
 				row++;
 				if(tablero[colum][row] != via){
