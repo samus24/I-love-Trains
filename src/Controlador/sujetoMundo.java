@@ -1,12 +1,12 @@
 package def;
 /*
 Revisado por Christian Álvarez
--Se han colocado las llaves.
+-Se han colocado las llaves, renombrar correctamente los atributos.
 */
 public class sujetoMundo {
 	// Atributos
-    tren misTrenes[];
-    señales misSeñales[];
+    Trenes misTrenes[];
+    Signal misSeñales[];
 //    observadores misObservadores[];
     ArrayList<Observador> misObservadores;
     // SOLO DEL MUNDO
