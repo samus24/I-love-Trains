@@ -20,7 +20,7 @@ public class CargarMundo {
 	private final static char casI = 'i';
 	private final static char casF = 'f';
 	private final static char via = 'c';
-	private static  final  int DIM = 60; //Dimensión del tablero
+	private static  final  int DIM = 60; //Dimensiï¿½n del tablero
 	private static char[][] tablero = new char[DIM][DIM];
 	private Mundo mundo;
 	private Senal[] _senales;
@@ -51,7 +51,8 @@ public class CargarMundo {
 						case via: tablero[i][j] = via; break;
 						default: throw new WrongMapFormatException(" Archivo incorrecto");
 					}				
-				}j++;
+				}
+				j++;
 			}
 		}catch(WrongMapFormatException e){
 			System.err.print(e.getMessage());
@@ -61,11 +62,13 @@ public class CargarMundo {
 		sc.close();
 		return tablero;
 	}
+	
 	private void locomotora(int i , int j) {
 		int k = _trenes.length + 1;
 		Coordenada c = new Coordenada(i, j);
 		mundo.setTren(_trenes[k] = new Tren(c), k);
 	}
+	
 	private void semV(int i, int j) {
 		int k = _senales.length + 1;
 		Coordenada c = new Coordenada(i, j);
