@@ -12,7 +12,7 @@ public class Main {
 		Controlador controler= new Controlador(modelo, vista);
 		do{
 			// Ejecucion del programa; Vista en ejecucion			
-		}while(!modelo.isQuit());
+		}while(!modelo.isQuit()); //mientras no termine la ejecucion
 
 	}
 
