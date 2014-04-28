@@ -1,12 +1,4 @@
-
-/*
- Calidad: Las llaves de apertura de bloque no estan colocadas a continuaci—n
- del nombre del metodo/clase
- 
- Corregido: Christian çlvarez.
- 
- */
-package pruebas;
+package vista;
 
 
 import java.awt.BorderLayout;
@@ -22,7 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class Trenes implements ActionListener{
+public class Trenes implements ActionListener
+{
 	private JTextField trayecto;
 	private JTextField numVagones;
 	private JButton  eliminar;
@@ -32,7 +25,8 @@ public class Trenes implements ActionListener{
 	private JLabel tren;
 	private JButton crear;
 	
-	public Trenes(){
+	public Trenes()
+	{
 		trayecto = new JTextField();
 		numVagones = new JTextField();
 		eliminar = new JButton("Eliminar");;
@@ -43,7 +37,8 @@ public class Trenes implements ActionListener{
 		crear = new JButton("Crear");
 	}
 	
-	public JPanel crearPreferenciaTrenes(){
+	public JPanel crearPreferenciaTrenes(/*pasar el vector de trenes*/)
+	{
 		JPanel prefTrenes = new JPanel(new BorderLayout(2,2));
 		prefTrenes.setLayout(null);
 		
@@ -96,18 +91,22 @@ public class Trenes implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e){
-		if ( e.getSource() == eliminar ){
+	public void actionPerformed(ActionEvent e)
+	{
+		if ( e.getSource() == eliminar )
+		{
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,"TREN ELIMINADO", "ATENCION!!",JOptionPane.WARNING_MESSAGE);
 		}
 		
-		if ( e.getSource() == crear ){
+		if ( e.getSource() == crear )
+		{
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,"TREN CREADO","Informacion",JOptionPane.INFORMATION_MESSAGE);
 		}
 		
-		if ( e.getSource() == cambiar ){
+		if ( e.getSource() == cambiar )
+		{
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,"TREN MODIFICADO","Informacion",JOptionPane.INFORMATION_MESSAGE);
 		}
