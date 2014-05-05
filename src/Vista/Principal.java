@@ -27,7 +27,6 @@ public class Principal implements ActionListener
 	{
 		borde = BorderFactory.createCompoundBorder();
 		barraMenu = new BarraMenu();
-		etiquetaMapa = new JLabel("Aquí va el mapa");
 		appTrenes = new Trenes();
 		senhales = new UIsignal();
 	}
@@ -36,18 +35,13 @@ public class Principal implements ActionListener
 	{
 		panelPrincipal = new JPanel(new BorderLayout());
 		panelIzquierdo = new JPanel(new CardLayout());
-		panelDerecho = crearPanel(Color.blue, 700,600);
+		panelDerecho = new Mapa();
 		
 		//Creamos paneles lado Izquierdo
 		
 		panelIzquierdo.add(crearPanel(Color.red, 300,600),"pVacio");
 		panelIzquierdo.add(cargarPanelTrenes(appTrenes),"pTrenes");
 		panelIzquierdo.add(cargarPanelSeñales(senhales),"pSeñales");
-		
-		//Añadimos etiqueta en panel Derecho
-		
-		etiquetaMapa.setForeground(Color.BLACK);
-		panelDerecho.add(etiquetaMapa);
 		
 		//Añadimos paneles al principal
 		
@@ -119,12 +113,12 @@ public class Principal implements ActionListener
 		}
 	}
 	
-	public static void main(String [] args) {
+	/*public static void main(String [] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				crearYMostrarGUI();
 				
 			}
 		});
-	}
+	}*/
 }
