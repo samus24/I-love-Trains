@@ -1,95 +1,70 @@
-package controlador;
+package Controlador;
 
+import Modelo.Coordenada;
+import Modelo.EstadoSenal;
+import Modelo.Mundo;
+import Modelo.Senal;
+import Modelo.Tren;
 
-/*
- Modificación Calidad: Corregida la colocación de las llaves de apertura
- para que se adapte al estándar. 
- -Christian-
- */
-/*
- Modificación Calidad: 
- 	CORREGIDO CONCEPTO ERRÓNEO DE CONSTRUCTOR.
- 		(en serio alguien confunde un setter con un constructor??)
- 	Corregido el espaciado de métodos, llaves y operadores.
- 	Correcciones para seguir el estandar:
- 		Corregido nombre de paquete en minúscula.
- 		Corregido nombres de métodos (actualizarInterfaz, actualizarMapa).
- -Héctor-
- */
-
-
-
-/**
- * Esta clase controla la transferencia de datos entre la interfaz de usuario el mapa y el modelo
- * @version 1.0
-*/
 public class Controlador {
-	private static Controlador controlador;
+
+	private Mundo mundo;
+
+	public Controlador(Mundo mundo){
+		this.mundo = mundo;
+	}
+
 	
-	/**
-	 * Metodo que crea un controlador estatico         
-	 * @return controlador           
-	 */
-	public Controlador() {
-		if (controlador == null) {
-			controlador = new Controlador();
-		}
+	public void eliminarTren(int id){
+		mundo.elimnarTren(id);
 	}
 	
-	//Metodos para la creacion y gestion de la ventana principal
-	/**
-	 * Metodo que crea la ventana principal de la aplicacion
-	 */
-	public void crearVentanaPrincipal() {
-		
+	public void modificarTren(int id, int numVagones){
+		mundo.modificarTren(id, numVagones);
 	}
 	
-	//Metodos para la actualizacion de la interfaz y el mapa
-	/**
-	 * Metodo que actualiza el mapa grafico
-	 */
-	public void actualizarMapa() {
-		
+	public void crearTren(int numVagones){
+		mundo.crearTren(numVagones);
 	}
 	
-	/**
-	 * Metodo que actualiza la interfaz de usuario
-	 */
-	public void actualizarInterfaz() {
-		
-	}
+	public void anadirSenal(Coordenada posicion, EstadoSenal estado){
+		mundo.anadirSenal(posicion, estado);
+	}	
 	
-	//Metodos diversos para la gestion del trafico de datos entre el modulo y la interfaz
-	/**
-	 * metodo que llama a crear tren con los datos pasados por la interfaz
-	 * @param
-	 */
-	public void crearTren() {
-		
+
+	public Tren[] getTrenes(){
+		return mundo.getTrenes();
 	}
-	
-	/**
-	 * metodo que llama a modificar tren con los datos pasados por la interfaz
-	 * @param
-	 */
-	public void modificarTren() {
-		
+
+	public char[][] getEstadoMundo(){
+		return mundo.getEstadoMundo();
 	}
-	
-	/**
-	 * metodo que llama a eliminar tren con los datos pasados por la interfaz
-	 * @param
-	 */
+
+	public Senal[] getSenal(){
+		return mundo.getSenales();
+	}
+	public void setTrenes(Tren tren, int i){
+		mundo.setTren(tren, i);
+	}
+
+	public void setSenal (Senal senal, int i){
+		mundo.setSenal(senal, i);
+	}
+
+	public void setEstadoMundo(char[][] nuevoEstadoMundo){
+		mundo.setEstadoMundo(nuevoEstadoMundo);
+	}
+	public void recalcularEstadoTrenes(){
+		mundo.recalcularEstadoTrenes();
+	}
+
 	public void eliminarTren() {
+		// TODO Auto-generated method stub
 		
 	}
-	public void a�adirSe�al() {
 
+	public void anadirSenal() {
+		// TODO Auto-generated method stub
+		
 	}
-	public void eliminarSe�al() {
-
-	}
-	
-
-	
 }

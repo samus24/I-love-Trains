@@ -1,4 +1,4 @@
-package vista;
+package Vista;
 
 public class Signal {
 	int x, y;

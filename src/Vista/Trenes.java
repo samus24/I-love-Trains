@@ -1,4 +1,4 @@
-package vista;
+package Vista;
 
 
 import java.awt.BorderLayout;
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controlador.Controlador;
+import Controlador.Controlador;
 
 
 public class Trenes implements ActionListener
@@ -28,7 +28,7 @@ public class Trenes implements ActionListener
 	private JButton crear;
 	private Controlador controlador;
 	
-	public Trenes()
+	public Trenes(Controlador controlador)
 	{
 		trayecto = new JTextField();
 		numVagones = new JTextField();
@@ -38,6 +38,7 @@ public class Trenes implements ActionListener
 		titulo = new JLabel("-- TRENES --");
 		tren = new JLabel("Tren:");
 		crear = new JButton("Crear");
+		this.controlador = controlador;
 	}
 	
 	public JPanel crearPreferenciaTrenes(/*pasar el vector de trenes*/)
@@ -105,15 +106,15 @@ public class Trenes implements ActionListener
 		
 		if ( e.getSource() == crear )
 		{
-			controlador.crearTren();
+			controlador.crearTren(1); //recibe vagones de la vista
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,"TREN CREADO","Informacion",JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		if ( e.getSource() == cambiar )
 		{
-			controlador.modificarTren();
-			JFrame frame = new JFrame();
+			controlador.modificarTren(1, 1);// recibe el id y el numero de vagones de la vista
+			JFrame frame = new JFrame(); 
 			JOptionPane.showMessageDialog(frame,"TREN MODIFICADO","Informacion",JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

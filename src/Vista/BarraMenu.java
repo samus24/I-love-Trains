@@ -1,17 +1,24 @@
-package vista;
+package Vista;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import Controlador.Controlador;
+
 
 public class BarraMenu
 {
 	private JMenu menu = new JMenu("Menu");
+	private Controlador controlador;
 	
 	public JMenuItem opcionTrenes = new JMenuItem("Trenes");
 	public JMenuItem opcionSeñales = new JMenuItem("Señales");
 	public JMenuItem opcionPagPrincipal = new JMenuItem("Pagina Principal");
+	
+	public BarraMenu(Controlador controlador){
+		this.controlador = controlador;
+	}
 	
 	public JMenuBar crearBarraMenu()
 	{

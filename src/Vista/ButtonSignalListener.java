@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package Vista;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import controlador.Controlador;
+import Controlador.Controlador;
 
 /**
  *
@@ -21,9 +21,9 @@ public class ButtonSignalListener implements ActionListener {
     UIsignal uisignal;
     Controlador guiControl;
 
-    public ButtonSignalListener(UIsignal uisignal) {
+    public ButtonSignalListener(UIsignal uisignal, Controlador controlador) {
         this.uisignal = uisignal;
-        this.guiControl= new Controlador();
+        this.guiControl= controlador;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ButtonSignalListener implements ActionListener {
                 break;
             case "addSignalButton":
                 uisignal.addSignal(new Signal(uisignal.getWhereSignal()[0], uisignal.getWhereSignal()[1]));
-                guiControl.añadirSeñal();
+                guiControl.anadirSenal(null, null);
                 break;
 
             default:

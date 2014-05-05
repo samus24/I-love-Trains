@@ -1,4 +1,4 @@
-package modelo;
+package Modelo;
 
 public class Vagon {
 

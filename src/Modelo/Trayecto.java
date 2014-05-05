@@ -1,3 +1,5 @@
-package modelo;
+package Modelo;
 
-public enum Trayecto {HorizontalDer,HorizontalIzq, VerticalArr, VerticalAba};
+public enum Trayecto {
+	HorizontalDer,HorizontalIzq, VerticalArr, VerticalAba
+	};

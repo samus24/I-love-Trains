@@ -1,4 +1,4 @@
-package vista;
+package Vista;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
+import Controlador.Controlador;
+
 public class Principal implements ActionListener
 {
 	private JPanel panelIzquierdo, panelDerecho, panelPrincipal;
@@ -22,14 +24,15 @@ public class Principal implements ActionListener
 	private BarraMenu barraMenu;
 	private Trenes appTrenes;
 	private UIsignal senhales;
+	private static Controlador controlador;
 	
-	public Principal()
-	{
+	public Principal(Controlador controlador){
+		this.controlador = controlador;
 		borde = BorderFactory.createCompoundBorder();
-		barraMenu = new BarraMenu();
+		barraMenu = new BarraMenu(this.controlador);
 		etiquetaMapa = new JLabel("Aquí va el mapa");
-		appTrenes = new Trenes();
-		senhales = new UIsignal();
+		appTrenes = new Trenes(this.controlador);
+		senhales = new UIsignal(this.controlador);
 	}
 	
 	public JPanel crearPanelPrincipal()
@@ -81,7 +84,7 @@ public class Principal implements ActionListener
 	
 	public static void crearYMostrarGUI() {
 		JFrame frame = new JFrame("Interfaz IS");
-		Principal principal = new Principal();
+		Principal principal = new Principal(controlador);
 		
 		frame.setContentPane(principal.crearPanelPrincipal());
 		frame.setJMenuBar(principal.barraMenu.crearBarraMenu());

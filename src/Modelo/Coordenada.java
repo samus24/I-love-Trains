@@ -1,4 +1,4 @@
-package modelo;
+package Modelo;
 
 /**
 *	Comprobado por Ignacio Rocillo

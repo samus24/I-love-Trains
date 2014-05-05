@@ -1,4 +1,4 @@
-package vista;
+package Vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,13 +14,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.plaf.basic.BasicOptionPaneUI;
 
+import Controlador.Controlador;
+
 public class UIsignal extends JPanel {
 
     private int nSignals;
     private JTextArea txtX, txtY;
+    private Controlador controlador;
 
-    public UIsignal()
+    public UIsignal(Controlador controlador)
     {
+    	this.controlador = controlador;
         nSignals = 0;
 
         setLayout(new GridLayout(6, 2, 2, 2));
@@ -42,7 +46,7 @@ public class UIsignal extends JPanel {
         panelAdd.add(txtY);
         JButton jb = new JButton("Añadir señal");
         jb.setActionCommand("addSignalButton");
-        jb.addActionListener(new ButtonSignalListener(this));
+        jb.addActionListener(new ButtonSignalListener(this, this.controlador));
         panelAdd.add(jb);
 
 
@@ -63,13 +67,13 @@ public class UIsignal extends JPanel {
         jbt.setActionCommand("signalButton");
         jbt.setAlignmentX(Component.CENTER_ALIGNMENT);
         jbt.setBackground(Color.red);
-        jbt.addActionListener(new ButtonSignalListener(this));
+        jbt.addActionListener(new ButtonSignalListener(this, this.controlador));
         jp.add(jbt);
 
         JButton jbr = new JButton("Eliminar");
         jbr.setAlignmentX(Component.RIGHT_ALIGNMENT);
         jbr.setActionCommand("removSignalButton");
-        jbr.addActionListener(new ButtonSignalListener(this));
+        jbr.addActionListener(new ButtonSignalListener(this,this.controlador));
         jp.add(jbr);
 
         this.add(jp);
