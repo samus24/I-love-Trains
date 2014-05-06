@@ -16,8 +16,7 @@ import javax.swing.JTextField;
 import Controlador.Controlador;
 
 
-public class Trenes implements ActionListener
-{
+public class Trenes implements ActionListener {
 	private JTextField trayecto;
 	private JTextField numVagones;
 	private JButton  eliminar;
@@ -28,8 +27,7 @@ public class Trenes implements ActionListener
 	private JButton crear;
 	private Controlador controlador;
 	
-	public Trenes(Controlador controlador)
-	{
+	public Trenes(Controlador controlador) {
 		trayecto = new JTextField();
 		numVagones = new JTextField();
 		eliminar = new JButton("Eliminar");;
@@ -41,8 +39,7 @@ public class Trenes implements ActionListener
 		this.controlador = controlador;
 	}
 	
-	public JPanel crearPreferenciaTrenes(/*pasar el vector de trenes*/)
-	{
+	public JPanel crearPreferenciaTrenes(/*pasar el vector de trenes*/) {
 		JPanel prefTrenes = new JPanel(new BorderLayout(2,2));
 		prefTrenes.setLayout(null);
 		
@@ -94,26 +91,21 @@ public class Trenes implements ActionListener
 		return prefTrenes;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		if ( e.getSource() == eliminar )
-		{
-			controlador.eliminarTren();//if(si tira error, mostrarlo con un system.err)
+	public void actionPerformed(ActionEvent e) {
+		if ( e.getSource() == eliminar ) {
+			controlador.eliminarTren(); //if(si tira error, mostrarlo con un system.err)
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,"TREN ELIMINADO", "ATENCION!!",JOptionPane.WARNING_MESSAGE);	
 		}
 		
-		if ( e.getSource() == crear )
-		{
+		if ( e.getSource() == crear ) {
 			controlador.crearTren(1); //recibe vagones de la vista
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,"TREN CREADO","Informacion",JOptionPane.INFORMATION_MESSAGE);
 		}
 		
-		if ( e.getSource() == cambiar )
-		{
-			controlador.modificarTren(1, 1);// recibe el id y el numero de vagones de la vista
+		if ( e.getSource() == cambiar ) {
+			controlador.modificarTren(1, 1); // recibe el id y el numero de vagones de la vista
 			JFrame frame = new JFrame(); 
 			JOptionPane.showMessageDialog(frame,"TREN MODIFICADO","Informacion",JOptionPane.INFORMATION_MESSAGE);
 		}

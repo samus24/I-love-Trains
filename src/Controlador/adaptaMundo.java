@@ -1,13 +1,13 @@
-package controlador;
+package Controlador;
 
 /*
-C√≥digo revisado por Christian √Ålvarez
+CÛdigo revisado por Christian ¡lvarez
 Se han colocado las llaves
 */
 
 public class adaptaMundo {
-	// M√©todos
-     void adaptaMapa(){ // Adaptar el mapa del mundo con la informaci√≥n bruta (a chars), y enviarlo para que la vista pueda imprimirlo
-		 // ¬øde donde sale la informaci√≥n bruta?
+	// MÈtodos
+     void adaptaMapa() { // Adaptar el mapa del mundo con la informaciÛn bruta (a chars), y enviarlo para que la vista pueda imprimirlo
+    	 
      }
 }

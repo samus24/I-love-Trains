@@ -13,7 +13,7 @@ public class SignalListener {
     private static UIsignal uisignal;
 
     public SignalListener(UIsignal uis) {
-        this.uisignal = uis;
+        uisignal = uis;
     }
 
     public void addSignal(Signal signal) {

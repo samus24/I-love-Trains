@@ -11,7 +11,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 import Controlador.Controlador;
@@ -24,21 +23,16 @@ public class Principal implements ActionListener
 	private BarraMenu barraMenu;
 	private Trenes appTrenes;
 	private UIsignal senhales;
-	private static Controlador controlador;
+	private Controlador controlador;
 	
-	public Principal(Controlador controlador){
+	public Principal (Controlador controlador) {
 		this.controlador = controlador;
 		borde = BorderFactory.createCompoundBorder();
-<<<<<<< HEAD
-		barraMenu = new BarraMenu(this.controlador);
+		
+		barraMenu = new BarraMenu(); // esto no necesita controlador, no?
 		etiquetaMapa = new JLabel("Aquí va el mapa");
 		appTrenes = new Trenes(this.controlador);
 		senhales = new UIsignal(this.controlador);
-=======
-		barraMenu = new BarraMenu();
-		appTrenes = new Trenes();
-		senhales = new UIsignal();
->>>>>>> 98bc08ee75ea1d43c0ee7e558ebc4282a6b1aef7
 	}
 	
 	public JPanel crearPanelPrincipal()
@@ -83,7 +77,7 @@ public class Principal implements ActionListener
 		return panel;
 	}
 	
-	public static void crearYMostrarGUI() {
+	public void crearYMostrarGUI() {
 		JFrame frame = new JFrame("Interfaz IS");
 		Principal principal = new Principal(controlador);
 		
@@ -96,8 +90,7 @@ public class Principal implements ActionListener
 		frame.setVisible(true);
 	} 
 	
-	public JPanel crearPanel(Color color, int x, int y)
-	{
+	public JPanel crearPanel(Color color, int x, int y) {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(x, y));
 		panel.setBackground(color);
@@ -105,9 +98,7 @@ public class Principal implements ActionListener
 		return panel;
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		CardLayout cl = (CardLayout) (panelIzquierdo.getLayout());
 		if(e.getSource() == barraMenu.opcionTrenes)
 		{

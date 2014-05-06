@@ -1,4 +1,4 @@
-package controlador;
+package Controlador;
 
 @SuppressWarnings("serial")
 public class WrongMapFormatException extends Exception{

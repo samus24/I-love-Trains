@@ -1,29 +1,26 @@
 package Vista;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.TextArea;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 
 import Controlador.Controlador;
 
+@SuppressWarnings("serial")
 public class UIsignal extends JPanel {
 
     private int nSignals;
     private JTextArea txtX, txtY;
     private Controlador controlador;
 
-    public UIsignal(Controlador controlador)
-    {
+    public UIsignal(Controlador controlador) {
     	this.controlador = controlador;
         nSignals = 0;
 

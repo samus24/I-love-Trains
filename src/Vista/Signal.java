@@ -17,6 +17,6 @@ public class Signal {
 	}
 
 	public String toString() {
-		return "SeÃ±al (" + x + "," + y + ")";
+		return "Señal (" + x + "," + y + ")";
 	}
 }

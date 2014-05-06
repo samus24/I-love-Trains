@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import javax.swing.JTextArea;
+
 import Utiles.Constantes;
 import Utiles.Lector;
 /**
@@ -95,6 +97,11 @@ public class Mundo {
 	public void crearTren(int numVagones) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public JTextArea mostrarMapa() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

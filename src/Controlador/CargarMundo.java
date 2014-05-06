@@ -1,9 +1,14 @@
-package controlador;
+package Controlador;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
-import modelo.*;
+import Modelo.Coordenada;
+import Modelo.EstadoSenal;
+import Modelo.Mundo;
+import Modelo.Senal;
+import Modelo.Trayecto;
+import Modelo.Tren;
 
 public class CargarMundo {
 	
@@ -15,7 +20,7 @@ public class CargarMundo {
 	private final static char casI = 'i';
 	private final static char casF = 'f';
 	private final static char via = 'c';
-	private static  final  int DIM = 60; //Dimensiï¿½n del tablero
+	private static  final  int DIM = 60; //Dimensión del tablero
 	private static char[][] tablero = new char[DIM][DIM];
 	private Mundo mundo;
 	private Senal[] _senales;
@@ -34,7 +39,8 @@ public class CargarMundo {
 			while(sc.hasNext()){
 				fila = sc.next();
 				array = fila.toCharArray();
-				for(int i = 0; i < array.length; i++){
+				
+				for (int i = 0; i < array.length; i++) {
 					switch (array[i]){
 						case vacia: tablero[i][j] = vacia; break;
 						case vagon: tablero[i][j] = vagon; break;
@@ -47,12 +53,14 @@ public class CargarMundo {
 						default: throw new WrongMapFormatException(" Archivo incorrecto");
 					}				
 				}
+				
 				j++;
 			}
-		}catch(WrongMapFormatException e){
+		} catch (WrongMapFormatException e){
 			System.err.print(e.getMessage());
 			System.exit(1);
 		}
+		
 		agregarTrayecto();
 		sc.close();
 		return tablero;
@@ -77,12 +85,14 @@ public class CargarMundo {
 		mundo.setSenal(_senales[k] = new Senal(c, EstadoSenal.ROJO), k);
 		
 	}
+	
 	private void agregarTrayecto(){
 		for(Tren e : _trenes ){
 			int row = e.getCoordenadaInicio().getCoordenadaY();
 			int colum = e.getCoordenadaInicio().getCoordenadaX();
 			boolean hayVia = true;
 			boolean encFinal = false;
+			
 			while(hayVia && colum < DIM && !encFinal){
 				colum++;
 				if(tablero[colum][row] != via){
@@ -92,6 +102,7 @@ public class CargarMundo {
 					e.setTrayecto(Trayecto.HorizontalDer);
 				}	
 			}
+			
 			colum = e.getCoordenadaInicio().getCoordenadaX();
 			while(hayVia && colum > 0 && !encFinal){
 				colum--;
@@ -102,6 +113,7 @@ public class CargarMundo {
 					e.setTrayecto(Trayecto.HorizontalIzq);
 				}	
 			}
+			
 			colum = e.getCoordenadaInicio().getCoordenadaX();
 			while(hayVia && row > 0 && !encFinal){
 				row--;
@@ -112,6 +124,7 @@ public class CargarMundo {
 					e.setTrayecto(Trayecto.VerticalArr);
 				}	
 			}
+			
 			colum = e.getCoordenadaInicio().getCoordenadaX();
 			row = e.getCoordenadaInicio().getCoordenadaY();
 			while(hayVia && row < DIM && !encFinal){

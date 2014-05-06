@@ -20,7 +20,7 @@ public class Lector {
 	private final static char casI = 'i';
 	private final static char casF = 'f';
 	private final static char via = 'c';
-	private static  final  int DIM = 60; //Dimensiï¿½n del tablero
+	private static  final  int DIM = 60; //Dimensión del tablero
 	private static char[][] tablero = new char[DIM][DIM];
 	private Mundo mundo;
 	private Senal[] _senales;
@@ -54,10 +54,11 @@ public class Lector {
 				}
 				j++;
 			}
-		}catch(WrongMapFormatException e){
+		} catch (WrongMapFormatException e) {
 			System.err.print(e.getMessage());
 			System.exit(1);
 		}
+		
 		agregarTrayecto();
 		sc.close();
 		return tablero;
@@ -82,12 +83,13 @@ public class Lector {
 		mundo.setSenal(_senales[k] = new Senal(c, EstadoSenal.ROJO), k);
 		
 	}
-	private void agregarTrayecto(){
-		for(Tren e : _trenes ){
+	private void agregarTrayecto() {
+		for (Tren e : _trenes) {
 			int row = e.getCoordenadaInicio().getCoordenadaY();
 			int colum = e.getCoordenadaInicio().getCoordenadaX();
 			boolean hayVia = true;
 			boolean encFinal = false;
+			
 			while(hayVia && colum < DIM && !encFinal){
 				colum++;
 				if(tablero[colum][row] != via){
@@ -97,6 +99,7 @@ public class Lector {
 					e.setTrayecto(Trayecto.HorizontalDer);
 				}	
 			}
+			
 			colum = e.getCoordenadaInicio().getCoordenadaX();
 			while(hayVia && colum > 0 && !encFinal){
 				colum--;
@@ -107,6 +110,7 @@ public class Lector {
 					e.setTrayecto(Trayecto.HorizontalIzq);
 				}	
 			}
+			
 			colum = e.getCoordenadaInicio().getCoordenadaX();
 			while(hayVia && row > 0 && !encFinal){
 				row--;
@@ -117,6 +121,7 @@ public class Lector {
 					e.setTrayecto(Trayecto.VerticalArr);
 				}	
 			}
+			
 			colum = e.getCoordenadaInicio().getCoordenadaX();
 			row = e.getCoordenadaInicio().getCoordenadaY();
 			while(hayVia && row < DIM && !encFinal){
