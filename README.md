@@ -3,7 +3,7 @@ I-love-Trains
 
 Para subir código al repositorio, ejecutar estos comandos:
 ```
-git add -A
+git add -A src
 git commit -m "tu mensaje relevante"
 git push
 ```
