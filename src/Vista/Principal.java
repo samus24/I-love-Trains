@@ -22,7 +22,7 @@ public class Principal implements ActionListener
 	private Border borde;
 	private BarraMenu barraMenu;
 	private Trenes appTrenes;
-	private UIsignal senhales;
+	private UIsignal senales;
 	private Controlador controlador;
 	
 	public Principal (Controlador controlador) {
@@ -30,9 +30,9 @@ public class Principal implements ActionListener
 		borde = BorderFactory.createCompoundBorder();
 		
 		barraMenu = new BarraMenu(); // esto no necesita controlador, no?
-		etiquetaMapa = new JLabel("Aquí va el mapa");
+		etiquetaMapa = new JLabel("Aqui va el mapa");
 		appTrenes = new Trenes(this.controlador);
-		senhales = new UIsignal(this.controlador);
+		senales = new UIsignal(this.controlador);
 	}
 	
 	public JPanel crearPanelPrincipal()
@@ -45,15 +45,15 @@ public class Principal implements ActionListener
 		
 		panelIzquierdo.add(crearPanel(Color.red, 300,600),"pVacio");
 		panelIzquierdo.add(cargarPanelTrenes(appTrenes),"pTrenes");
-		panelIzquierdo.add(cargarPanelSeñales(senhales),"pSeñales");
+		panelIzquierdo.add(cargarPanelSeÃ±ales(senales),"pSenales");
 		
-		//Añadimos paneles al principal
+		//Aï¿½adimos paneles al principal
 		
 		panelPrincipal.add(panelIzquierdo,BorderLayout.LINE_START);
 		panelPrincipal.add(panelDerecho,BorderLayout.CENTER);
 		
 		barraMenu.opcionTrenes.addActionListener(this);
-		barraMenu.opcionSeñales.addActionListener(this);
+		barraMenu.opcionSenales.addActionListener(this);
 		barraMenu.opcionPagPrincipal.addActionListener(this);
 		
 		return panelPrincipal;
@@ -68,10 +68,10 @@ public class Principal implements ActionListener
 		return panel;
 	}
 	
-	public JPanel cargarPanelSeñales(UIsignal senhales)
+	public JPanel cargarPanelSenales(UIsignal senales)
 	{
 		JPanel panel = new JPanel();
-		panel = senhales;
+		panel = senales;
 		panel.setBorder(this.borde);
 
 		return panel;
@@ -104,9 +104,9 @@ public class Principal implements ActionListener
 		{
 			cl.show(panelIzquierdo, "pTrenes");
 		}
-		else if(e.getSource() == barraMenu.opcionSeñales)
+		else if(e.getSource() == barraMenu.opcionSenales)
 		{
-			cl.show(panelIzquierdo, "pSeñales");
+			cl.show(panelIzquierdo, "pSenales");
 		}
 		else if(e.getSource() == barraMenu.opcionPagPrincipal)
 		{
