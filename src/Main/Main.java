@@ -7,7 +7,7 @@ import Modelo.Mundo;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO terminar main
 		Mundo modelo  = new Mundo();
 		Controlador controlador = new Controlador(modelo);
 		Principal vista = new Principal(controlador);		
