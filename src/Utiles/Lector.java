@@ -1,6 +1,7 @@
 package Utiles;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Modelo.Coordenada;
@@ -22,15 +23,11 @@ public class Lector {
 	private final static char via = 'c';
 	private static  final  int DIM = 60; //Dimensión del tablero
 	private static char[][] tablero = new char[DIM][DIM];
-	private Mundo mundo;
-	private Senal[] _senales;
-	private Tren[] _trenes ;
-	
 	
 	/**
 	 * Recibe un archivo abierto <mapa>
 	 */
-	public char[][] cargarMapa(InputStream mapa){
+	public char[][] cargarMapa(InputStream mapa,Mundo mundo){
 		Scanner sc = new Scanner(mapa);
 		String fila;
 		char[] array;
@@ -43,9 +40,9 @@ public class Lector {
 					switch (array[i]){
 						case vacia: tablero[i][j] = vacia; break;
 						case vagon: tablero[i][j] = vagon; break;
-						case locomotora: tablero[i][j] = locomotora; locomotora(i, j); break;
-						case semV: tablero[i][j] = semV;semV(i,j); break;
-						case semR: tablero[i][j] = semR;semR(i,j); break;
+						case locomotora: tablero[i][j] = locomotora; locomotora(i, j,mundo); break;
+						case semV: tablero[i][j] = semV;semV(i,j,mundo); break;
+						case semR: tablero[i][j] = semR;semR(i,j,mundo); break;
 						case casI: tablero[i][j] = casI; break;
 						case casF: tablero[i][j] = casF; break;
 						case via: tablero[i][j] = via; break;
@@ -59,32 +56,30 @@ public class Lector {
 			System.exit(1);
 		}
 		
-		agregarTrayecto();
+		agregarTrayecto(mundo);
 		sc.close();
 		return tablero;
 	}
 	
-	private void locomotora(int i , int j) {
-		int k = _trenes.length + 1;
+	private void locomotora(int i , int j, Mundo mundo) {
 		Coordenada c = new Coordenada(i, j);
-		mundo.setTren(_trenes[k] = new Tren(c), k);
+		mundo.setTren(new Tren(c));
 	}
 	
-	private void semV(int i, int j) {
-		int k = _senales.length + 1;
+	private void semV(int i, int j, Mundo mundo) {
 		Coordenada c = new Coordenada(i, j);
-		mundo.setSenal(_senales[k] = new Senal(c, EstadoSenal.VERDE), k);
-		
+		mundo.setSenal(new Senal(c, EstadoSenal.VERDE));
 	}
 	
-	private void semR(int i, int j) {
-		int k = _senales.length + 1;
+	private void semR(int i, int j, Mundo mundo) {
 		Coordenada c = new Coordenada(i, j);
-		mundo.setSenal(_senales[k] = new Senal(c, EstadoSenal.ROJO), k);
+		mundo.setSenal(new Senal(c, EstadoSenal.ROJO));
 		
 	}
-	private void agregarTrayecto() {
-		for (Tren e : _trenes) {
+	private void agregarTrayecto(Mundo mundo) {
+		Tren e;
+		for(int i=0; i<mundo.getTrenes().size();i++){
+			e =  mundo.getTrenes().get(i);
 			int row = e.getCoordenadaInicio().getCoordenadaY();
 			int colum = e.getCoordenadaInicio().getCoordenadaX();
 			boolean hayVia = true;

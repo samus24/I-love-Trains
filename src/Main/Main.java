@@ -11,6 +11,7 @@ public class Main {
 		Mundo modelo  = new Mundo();
 		Controlador controlador = new Controlador(modelo);
 		Principal vista = new Principal(controlador);		
+		vista.crearYMostrarGUI();
 		
 	}
 

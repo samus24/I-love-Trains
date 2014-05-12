@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
+import Controlador.Controlador;
 import Modelo.Mundo;
 
 /**
@@ -15,11 +17,11 @@ import Modelo.Mundo;
  */
 @SuppressWarnings("serial")
 public class Mapa extends JPanel {
-	private Mundo mundo;
+	private Controlador contr;
 	private JTextArea salida;
 
-	public Mapa() {
-		mundo = new Mundo();
+	public Mapa(Controlador contr) {
+		this.contr = contr;
 		iniciarVista();
 	}
 	
@@ -27,10 +29,11 @@ public class Mapa extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new TitledBorder("Mapa"));
 
-		salida = mundo.mostrarMapa();
+		salida = contr.mostrarMapa();
 		salida.setFont(new Font("Courier", Font.PLAIN, 16));
 		salida.setEditable(false);
+		JScrollPane panel = new JScrollPane(salida);
 		
-		this.add(salida);
+		this.add(panel);
 	}
 }

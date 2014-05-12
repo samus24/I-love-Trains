@@ -49,8 +49,8 @@ public class UIsignal extends JPanel {
 
         add(panelAdd);
         setVisible(true);
-        addSignal(new Signal(2, 2));
-        addSignal(new Signal(3, 5));
+//        addSignal(new Signal(2, 2));
+//        addSignal(new Signal(3, 5));
     }
 
     public void addSignal(Signal signal) {

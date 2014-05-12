@@ -1,5 +1,7 @@
 package Controlador;
 
+import javax.swing.JTextArea;
+
 import Modelo.Coordenada;
 import Modelo.EstadoSenal;
 import Modelo.Mundo;
@@ -65,5 +67,8 @@ public class Controlador {
 	public void anadirSenal() {
 		// TODO Auto-generated method stub
 		
+	}
+	public JTextArea mostrarMapa(){
+		return mundo.mostrarMapa();
 	}
 }

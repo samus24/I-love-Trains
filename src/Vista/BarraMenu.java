@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 public class BarraMenu {
 	private JMenu menu = new JMenu("Menu");
 	public JMenuItem opcionTrenes = new JMenuItem("Trenes");
-	public JMenuItem opcionSeñales = new JMenuItem("Señales");
+	public JMenuItem opcionSenales = new JMenuItem("Señales");
 	public JMenuItem opcionPagPrincipal = new JMenuItem("Pagina Principal");
 	
 	public BarraMenu() { // esto no necesita controlador, no?
@@ -24,7 +24,7 @@ public class BarraMenu {
 		
 		//Rellenamos los conjuntos
 		menu.add(opcionTrenes);
-		menu.add(opcionSeñales);
+		menu.add(opcionSenales);
 		menu.addSeparator(); //Añadimos un separador
 		menu.add(opcionPagPrincipal);
 

@@ -39,13 +39,13 @@ public class Principal implements ActionListener
 	{
 		panelPrincipal = new JPanel(new BorderLayout());
 		panelIzquierdo = new JPanel(new CardLayout());
-		panelDerecho = new Mapa();
+		panelDerecho = new Mapa(controlador);
 		
 		//Creamos paneles lado Izquierdo
 		
 		panelIzquierdo.add(crearPanel(Color.red, 300,600),"pVacio");
 		panelIzquierdo.add(cargarPanelTrenes(appTrenes),"pTrenes");
-		panelIzquierdo.add(cargarPanelSeñales(senales),"pSenales");
+		panelIzquierdo.add(cargarPanelSenales(senales),"pSenales");
 		
 		//A�adimos paneles al principal
 		

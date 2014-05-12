@@ -3,6 +3,7 @@ package Modelo;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 
@@ -14,14 +15,13 @@ import Utiles.Lector;
 */
 
 public class Mundo {
-	private Tren[] trenes;
-	private Senal[] senales;
+	private ArrayList<Senal> senales;
+	private ArrayList<Tren> trenes ;
 	private char[][] estadoMundo;
-	//private static final  int DIM = 60; si no hay mostrarMapa ya no es necesaria
-	
+	private static final  int DIM = 60; 
 	public Mundo(){
-		trenes = new Tren[Constantes.MAX_TRENES];
-		senales = new Senal[Constantes.MAX_SENALES];
+		trenes = new ArrayList<Tren>();
+		senales =  new ArrayList<Senal>();
 		
 		cargarModelo();
 	}
@@ -30,7 +30,7 @@ public class Mundo {
 		try {
 			InputStream mapa = new FileInputStream(Constantes.NOMBRE_ARCHIVO);
 			Lector lector = new Lector();
-			estadoMundo = lector.cargarMapa(mapa);
+			estadoMundo = lector.cargarMapa(mapa,this);
 		} catch (FileNotFoundException e) {
 			System.err.println("No se ha encontrado el archivo");
 		}
@@ -55,20 +55,20 @@ public class Mundo {
 		}
 	}*/
 	
-	public Senal[] getSenales() {
+	public ArrayList<Senal> getSenales() {
 		return senales;
 	}
 	
-	public void setSenal(Senal senal, int i) {
-		senales[i] = senal;
+	public void setSenal(Senal senal) {
+		senales.add(senal);
 	}
 	
-	public Tren[] getTrenes() {
+	public ArrayList<Tren> getTrenes() {
 		return trenes;
 	}
 	
-	public void setTren(Tren _trenes, int i) {
-		trenes[i] = _trenes;
+	public void setTren(Tren tren) {
+		trenes.add(tren);
 	}
 	
 	public char[][] getEstadoMundo() {
@@ -84,7 +84,7 @@ public class Mundo {
 		
 	}
 
-	public void elimnarTren(int id) {
+	public void eliminarTren(int id) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -101,7 +101,27 @@ public class Mundo {
 
 	public JTextArea mostrarMapa() {
 		// TODO Auto-generated method stub
-		return null;
+	    /* * */JTextArea texto = new JTextArea();
+        /* * */StringBuilder contenido = new StringBuilder();
+        for(int i = 0; i < DIM; i++){
+            for(int j = 0; j < DIM; j++){
+                if(estadoMundo[j][i] == '*')//Columnas extrapoladas, se han corregido (antes era [i][j]
+                    //System.out.print(" ");
+                    /* * */contenido.append(" ");    
+                else
+                    //System.out.print(estadoMundo[i][j]);
+                    /* * */contenido.append(estadoMundo[j][i]);                
+            }
+            //System.out.println("");
+            /* * */contenido.append('\n');
+        }
+        /* * */texto.setText(contenido.toString());
+        /* * */return texto;
+	}
+
+	public void setTren(boolean add) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
