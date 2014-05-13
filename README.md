@@ -1,7 +1,14 @@
 I-love-Trains
 =============
+Para bajarte el proyecto tienes que abrir Git Bash, posicionarte sobre la carpeta donde quieres que se descargue, e introducir:
 
-Para subir código al repositorio, ejecutar estos comandos:
+```
+git clone https://github.com/samus24/I-love-Trains.git
+```
+
+-------------
+
+Para subir código al repositorio, posicionate sobre la carpeta del proyecto y ejecuta estos comandos:
 ```
 git add -A src
 git commit -m "tu mensaje relevante"
