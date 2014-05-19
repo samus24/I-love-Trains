@@ -81,9 +81,11 @@ public class Mundo {
 
 	public void anadirSenal(Coordenada posicion, EstadoSenal estado) {
 		// TODO Auto-generated method stub
-		
+		this.senales.add(new Senal(posicion, estado));
 	}
-
+	public void eliminarSenal(Senal del){
+		this.senales.remove(del);
+	}
 	public void eliminarTren(int id) {
 		// TODO Auto-generated method stub
 		

@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Modelo.Senal;
+
 /**
  *
  * @author furia
@@ -16,7 +18,7 @@ public class SignalListener {
         uisignal = uis;
     }
 
-    public void addSignal(Signal signal) {
+    public void addSignal(Senal signal) {
         uisignal.addSignal(signal);
     }
 

@@ -1,5 +1,7 @@
 package Controlador;
 
+import java.util.ArrayList;
+
 import javax.swing.JTextArea;
 
 import Modelo.Coordenada;
@@ -7,6 +9,7 @@ import Modelo.EstadoSenal;
 import Modelo.Mundo;
 import Modelo.Senal;
 import Modelo.Tren;
+import Vista.Signal;
 
 public class Controlador {
 
@@ -18,7 +21,7 @@ public class Controlador {
 
 	
 	public void eliminarTren(int id){
-		mundo.elimnarTren(id);
+		mundo.eliminarTren(id);
 	}
 	
 	public void modificarTren(int id, int numVagones){
@@ -33,7 +36,7 @@ public class Controlador {
 		mundo.anadirSenal(posicion, estado);
 	}	
 	
-	public Tren[] getTrenes(){
+	public ArrayList<Tren> getTrenes(){
 		return mundo.getTrenes();
 	}
 
@@ -41,15 +44,15 @@ public class Controlador {
 		return mundo.getEstadoMundo();
 	}
 
-	public Senal[] getSenal(){
+	public ArrayList<Senal> getSenal(){
 		return mundo.getSenales();
 	}
-	public void setTrenes(Tren tren, int i){
-		mundo.setTren(tren, i);
+	public void setTrenes(Tren tren){
+		mundo.setTren(tren);
 	}
 
-	public void setSenal (Senal senal, int i){
-		mundo.setSenal(senal, i);
+	public void setSenal (Senal senal){
+		mundo.setSenal(senal);
 	}
 
 	public void setEstadoMundo(char[][] nuevoEstadoMundo){
@@ -70,5 +73,10 @@ public class Controlador {
 	}
 	public JTextArea mostrarMapa(){
 		return mundo.mostrarMapa();
+	}
+
+
+	public void eliminarSenal(Senal senal) {
+		mundo.eliminarSenal(senal);
 	}
 }

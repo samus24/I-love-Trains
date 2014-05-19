@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import Controlador.Controlador;
+import Modelo.Coordenada;
+import Modelo.EstadoSenal;
+import Modelo.Senal;
 
 @SuppressWarnings("serial")
 public class UIsignal extends JPanel {
@@ -43,18 +48,25 @@ public class UIsignal extends JPanel {
         panelAdd.add(txtY);
         JButton jb = new JButton("Añadir señal");
         jb.setActionCommand("addSignalButton");
-        jb.addActionListener(new ButtonSignalListener(this, this.controlador));
+        jb.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				addSignal();
+			}
+		});
         panelAdd.add(jb);
 
 
         add(panelAdd);
         setVisible(true);
-//        addSignal(new Signal(2, 2));
-//        addSignal(new Signal(3, 5));
     }
 
-    public void addSignal(Signal signal) {
+    public void addSignal() {
         nSignals++;
+        Senal anyadir= new Senal(new Coordenada(Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText())), EstadoSenal.ROJO);
+        
         JPanel jp = new JPanel();
         jp.setLayout(new BoxLayout(jp, BoxLayout.X_AXIS));
         JLabel jlab = new JLabel(nSignals + ")" + signal.toString());
@@ -64,13 +76,15 @@ public class UIsignal extends JPanel {
         jbt.setActionCommand("signalButton");
         jbt.setAlignmentX(Component.CENTER_ALIGNMENT);
         jbt.setBackground(Color.red);
-        jbt.addActionListener(new ButtonSignalListener(this, this.controlador));
+        jbt.addActionListener(new ButtonSignalListener(signal,this, this.controlador));
         jp.add(jbt);
 
         JButton jbr = new JButton("Eliminar");
         jbr.setAlignmentX(Component.RIGHT_ALIGNMENT);
         jbr.setActionCommand("removSignalButton");
-        jbr.addActionListener(new ButtonSignalListener(this,this.controlador));
+        jbr.addActionListener(new ButtonSignalListener(signal,this,this.controlador){
+        	
+        });
         jp.add(jbr);
 
         this.add(jp);

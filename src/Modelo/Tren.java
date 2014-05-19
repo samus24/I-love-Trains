@@ -66,11 +66,11 @@ public class Tren{
 		coordenadaInicio = null;		
 	}
 
-	public void avanza(Senal[] s) {
+	public void avanza(ArrayList<Senal> s) {
 		int i = 0;
 		boolean enc = false;
-		while(i != s.length && !enc){
-			if(s[i].getCoordenada() == coordenadaActual){
+		while(i != s.size()&& !enc){
+			if(s.get(i).getCoordenada() == coordenadaActual){
 				enc = true;
 			}
 			i++;

@@ -30,7 +30,7 @@ public class Trenes implements ActionListener {
 	public Trenes(Controlador controlador) {
 		trayecto = new JTextField();
 		numVagones = new JTextField();
-		eliminar = new JButton("Eliminar");;
+		eliminar = new JButton("Eliminar");
 		cambiar = new JButton("Cambiar");
 		vagones = new JLabel("Nº Vagones:");
 		titulo = new JLabel("-- TRENES --");

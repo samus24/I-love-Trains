@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import Controlador.Controlador;
+import Modelo.Coordenada;
+import Modelo.EstadoSenal;
+import Modelo.Senal;
 
 /**
  *
@@ -18,12 +21,14 @@ import Controlador.Controlador;
  */
 public class ButtonSignalListener implements ActionListener {
 
-    UIsignal uisignal;
-    Controlador guiControl;
-
-    public ButtonSignalListener(UIsignal uisignal, Controlador controlador) {
+    private UIsignal uisignal;
+    private Controlador guiControl;
+    private Senal senal;
+    
+    public ButtonSignalListener(Senal senal, UIsignal uisignal, Controlador controlador) {
         this.uisignal = uisignal;
         this.guiControl= controlador;
+        this.senal = senal;
     }
 
     @Override
@@ -38,9 +43,14 @@ public class ButtonSignalListener implements ActionListener {
                 }
                 break;
             case "addSignalButton":
-                uisignal.addSignal(new Signal(uisignal.getWhereSignal()[0], uisignal.getWhereSignal()[1]));
-                guiControl.anadirSenal(null, null);
+            	Coordenada c = new Coordenada(uisignal.getWhereSignal()[0], uisignal.getWhereSignal()[1]);
+                uisignal.addSignal(senal);
+                guiControl.anadirSenal(c,EstadoSenal.ROJO);
                 break;
+                
+            case "removSignalButton":
+            	guiControl.eliminarSenal(this.senal);
+            	break;
 
             default:
 
