@@ -8,8 +8,8 @@ import Modelo.Coordenada;
 import Modelo.EstadoSenal;
 import Modelo.Mundo;
 import Modelo.Senal;
+import Modelo.Trayecto;
 import Modelo.Tren;
-import Vista.Signal;
 
 public class Controlador {
 
@@ -24,12 +24,12 @@ public class Controlador {
 		mundo.eliminarTren(id);
 	}
 	
-	public void modificarTren(int id, int numVagones){
-		mundo.modificarTren(id, numVagones);
+	public void modificarTren(int id, int numVagones,Trayecto trayecto){
+		mundo.modificarTren(id, numVagones,trayecto);
 	}
 	
-	public void crearTren(int numVagones){
-		mundo.crearTren(numVagones);
+	public void crearTren(int numVagones,Coordenada c,Trayecto trayecto){
+		mundo.anadirTren(numVagones,c,trayecto);
 	}
 	
 	public void anadirSenal(Coordenada posicion, EstadoSenal estado){
@@ -62,15 +62,6 @@ public class Controlador {
 		mundo.recalcularEstadoTrenes();
 	}
 
-	public void eliminarTren() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void anadirSenal() {
-		// TODO Auto-generated method stub
-		
-	}
 	public JTextArea mostrarMapa(){
 		return mundo.mostrarMapa();
 	}

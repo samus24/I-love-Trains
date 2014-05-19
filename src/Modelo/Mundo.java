@@ -4,9 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
 import javax.swing.JTextArea;
-
 import Utiles.Constantes;
 import Utiles.Lector;
 /**
@@ -88,17 +86,22 @@ public class Mundo {
 	}
 	public void eliminarTren(int id) {
 		// TODO Auto-generated method stub
-		
+		this.trenes.remove(id);
 	}
 
-	public void modificarTren(int id, int numVagones) {
+	public void modificarTren(int id, int numVagones,Trayecto trayecto) {
 		// TODO Auto-generated method stub
-		
+		try {
+			this.trenes.get(id).setVagones(numVagones,trayecto);
+			
+		} catch (IndexOutOfBoundsException e) {
+			System.err.println("Error: No existe ese tren.");
+		}
 	}
 
-	public void crearTren(int numVagones) {
-		// TODO Auto-generated method stub
-		
+	public void anadirTren(int numVagones,Coordenada c,Trayecto trayecto) {
+		// TODO Auto-generated method stub		
+		this.trenes.add(new Tren(c,trayecto,numVagones));
 	}
 
 	public JTextArea mostrarMapa() {
@@ -119,11 +122,6 @@ public class Mundo {
         }
         /* * */texto.setText(contenido.toString());
         /* * */return texto;
-	}
-
-	public void setTren(boolean add) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

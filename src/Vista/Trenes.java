@@ -93,13 +93,13 @@ public class Trenes implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if ( e.getSource() == eliminar ) {
-			controlador.eliminarTren(); //if(si tira error, mostrarlo con un system.err)
+			controlador.eliminarTren(1); //if(si tira error, mostrarlo con un system.err)
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,"TREN ELIMINADO", "ATENCION!!",JOptionPane.WARNING_MESSAGE);	
 		}
 		
 		if ( e.getSource() == crear ) {
-			controlador.crearTren(1); //recibe vagones de la vista
+			controlador.crearTren(Integer.parseInt(numVagones.getText()), c, trayecto); //recibe vagones de la vista
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,"TREN CREADO","Informacion",JOptionPane.INFORMATION_MESSAGE);
 		}

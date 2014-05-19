@@ -7,23 +7,22 @@ public class Tren{
 	private Coordenada coordenadaInicio;
 	private Coordenada coordenadaActual;
 	private int numVagones;
-	private ArrayList <Vagon> listaVagones;
 	
 	public Tren(Coordenada coordenada){
 		coordenadaInicio = coordenada;
 		this.numVagones = 0; //Locomotora
-		listaVagones = new ArrayList<Vagon>();
 	}
 	
-	public Tren(Coordenada coordenada, Trayecto trayecto, Vagon[] vagon){
+	public Tren(Coordenada coordenada, Trayecto trayecto){
 		this.coordenadaInicio = coordenada;
 		this.trayecto = trayecto;
-		this.listaVagones = new ArrayList<Vagon>();
-		numVagones = 0;
-		for(Vagon v: vagon){ //Por cada vagon de <vagon> se añade a la lista de vagones			
-			this.listaVagones.add(v);
-			numVagones++;
-		}
+		this.numVagones = 0;
+	}
+	
+	public Tren(Coordenada coordenada, Trayecto trayecto,int numVagones){
+		this.coordenadaInicio = coordenada;
+		this.trayecto = trayecto;
+		this.numVagones = numVagones;
 	}
 	
 	public int  getVagones(){		
@@ -40,30 +39,6 @@ public class Tren{
 	}
 	public void setTrayecto(Trayecto t){
 		trayecto = t;
-	}
-	
-	/**
-	 * Cambia la lista de vagones por la que se pasa por parámetro.
-	 * Puede cambiar el trayecto, siempre que no implique un salto de via(espacio en blanco) , 
-	 * por lo que se deberia de ultilizar una funcion auxilidar que comprobara si se puede hacer
-	 * @param trayecto
-	 * @param vagon Lista de vagones que a insertar
-	 */
-	public void modificarTren(Vagon[] nuevalistaVagones, Trayecto trayecto){
-		this.trayecto = trayecto;
-		
-		listaVagones.clear();
-		if(nuevalistaVagones != null)
-		for(Vagon v: nuevalistaVagones) //Por cada vagon de <vagon> se añade a la lista de vagones			
-			this.listaVagones.add(v);
-	}
-	
-	/**
-	 * Elimina los vagones y la locomotora por defecto.
-	 */
-	public void eliminarTren(){
-		listaVagones.clear();
-		coordenadaInicio = null;		
 	}
 
 	public void avanza(ArrayList<Senal> s) {
@@ -84,5 +59,11 @@ public class Tren{
 			}
 		}
 		
+	}
+
+	public void setVagones(int numVagones,Trayecto trayecto) {
+		// TODO Auto-generated method stub
+		this.numVagones=numVagones;
+		this.trayecto=trayecto;
 	}
 }
