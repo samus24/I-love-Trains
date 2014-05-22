@@ -108,9 +108,9 @@ public class Controlador {
 					else{
 						tablero[c.getCoordenadaX()][c.getCoordenadaY()-1]='l';
 						for(int i=1; i <= e.getVagones(); i++)
-							tablero[c.getCoordenadaX()][c.getCoordenadaY()-i-1]='t';
+							tablero[c.getCoordenadaX()][c.getCoordenadaY()+i-1]='t';
 						//marcamos la ultima casilla como que hemos pasado por ella
-						tablero[c.getCoordenadaX()][c.getCoordenadaY()-e.getVagones()]='c';
+						tablero[c.getCoordenadaX()][c.getCoordenadaY()+e.getVagones()]='c';
 						//actualizamos en el arraylist
 						e.getCoordenadaInicio().setX(c.getCoordenadaX());
 						e.getCoordenadaInicio().setY(c.getCoordenadaY()-1);
@@ -137,9 +137,9 @@ public class Controlador {
 					else{
 						tablero[c.getCoordenadaX()-1][c.getCoordenadaY()]='l';
 						for(int i=1; i <= e.getVagones(); i++)
-							tablero[c.getCoordenadaX()-i-1][c.getCoordenadaY()]='t';
+							tablero[c.getCoordenadaX()+i-1][c.getCoordenadaY()]='t';
 						//marcamos la ultima casilla como que hemos pasado por ella
-						tablero[c.getCoordenadaX()-e.getVagones()][c.getCoordenadaY()]='c';	
+						tablero[c.getCoordenadaX()+e.getVagones()][c.getCoordenadaY()]='c';	
 						//actualizamos en el arraylist
 						e.getCoordenadaInicio().setX(c.getCoordenadaX());
 						e.getCoordenadaInicio().setY(c.getCoordenadaY()-1);
