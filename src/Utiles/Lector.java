@@ -1,7 +1,6 @@
 package Utiles;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import Modelo.Coordenada;
@@ -21,8 +20,7 @@ public class Lector {
 	private final static char casI = 'i';
 	private final static char casF = 'f';
 	private final static char via = 'c';
-	private static  final  int DIM = 60; //Dimensión del tablero
-	private static char[][] tablero = new char[DIM][DIM];
+	private static char[][] tablero = new char[Constantes.DIMENSION_MAPA_X][Constantes.DIMENSION_MAPA_Y];
 	
 	/**
 	 * Recibe un archivo abierto <mapa>
@@ -85,13 +83,13 @@ public class Lector {
 			boolean hayVia = true;
 			boolean encFinal = false;
 			
-			while(hayVia && colum < DIM && !encFinal){
+			while(hayVia && colum < Constantes.DIMENSION_MAPA_X && !encFinal){
 				colum++;
 				if(tablero[colum][row] != via){
 					hayVia = false;
 				}if(tablero[colum][row] == casF){
 					encFinal = true;
-					e.setTrayecto(Trayecto.HorizontalDer);
+					e.setTrayecto(Trayecto.HorizontalDerecha);
 				}	
 			}
 			
@@ -102,7 +100,7 @@ public class Lector {
 					hayVia = false;
 				}if(tablero[colum][row] == casF){
 					encFinal = true;
-					e.setTrayecto(Trayecto.HorizontalIzq);
+					e.setTrayecto(Trayecto.HorizontalIzquierda);
 				}	
 			}
 			
@@ -113,23 +111,26 @@ public class Lector {
 					hayVia = false;
 				}if(tablero[colum][row] == casF){
 					encFinal = true;
-					e.setTrayecto(Trayecto.VerticalArr);
+					e.setTrayecto(Trayecto.VerticalArriba);
 				}	
 			}
 			
 			colum = e.getCoordenadaInicio().getCoordenadaX();
 			row = e.getCoordenadaInicio().getCoordenadaY();
-			while(hayVia && row < DIM && !encFinal){
+			while(hayVia && row < Constantes.DIMENSION_MAPA_X && !encFinal){
 				row++;
 				if(tablero[colum][row] != via){
 					hayVia = false;
 				}if(tablero[colum][row] == casF){
 					encFinal = true;
-					e.setTrayecto(Trayecto.VerticalAba);
+					e.setTrayecto(Trayecto.VerticalAbajo);
 				}	
 			}
 		}	
-		
+		mundo.getTrenes().get(0).setTrayecto(Trayecto.HorizontalDerecha);
+		mundo.getTrenes().get(0).setVagones(4);
+		mundo.getTrenes().get(1).setTrayecto(Trayecto.VerticalAbajo);
+		mundo.getTrenes().get(1).setVagones(6);
 	}
 	
 }

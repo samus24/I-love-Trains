@@ -29,7 +29,6 @@ public class Senal{
 	}
 
 	public String toString(){
-		Coordenada pos = this.posicion;
-		return "Senal "+ pos.toString();
+		return posicion.toString();
 	}
 }

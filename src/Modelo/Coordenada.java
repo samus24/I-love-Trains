@@ -15,7 +15,7 @@ public class Coordenada {
 	}
 	
 	public String toString(){
-		return "( "+ x +" , "+ y + " )";
+		return "( "+ y +" , "+ x + " )";
 	}
 	
 	public int getCoordenadaX(){

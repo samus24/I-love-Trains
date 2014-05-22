@@ -1,125 +1,187 @@
 package Vista;
 
 import java.awt.BorderLayout;
+
+import javax.swing.SwingUtilities;
+
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import Controlador.Controlador;
+import Modelo.EstadoSenal;
+import Modelo.Senal;
 
-public class Principal implements ActionListener
-{
-	private JPanel panelIzquierdo, panelDerecho, panelPrincipal;
-	private JLabel etiquetaMapa;
-	private Border borde;
-	private BarraMenu barraMenu;
-	private Trenes appTrenes;
+@SuppressWarnings("serial")
+public class Principal extends JFrame implements ItemListener{
+	private static Mapa mapa;
+	private Trenes trains;
 	private UIsignal senales;
-	private Controlador controlador;
+	private static Controlador controlador;
+	private String [] vectorCadena = {"Principal","Trenes","Señales"};
 	
+	private JPanel cards;
+	
+	@SuppressWarnings("static-access")
 	public Principal (Controlador controlador) {
-		this.controlador = controlador;
-		borde = BorderFactory.createCompoundBorder();
-		
-		barraMenu = new BarraMenu(); // esto no necesita controlador, no?
-		etiquetaMapa = new JLabel("Aqui va el mapa");
-		appTrenes = new Trenes(this.controlador);
+		this.controlador = controlador;	
+		trains = new Trenes(this.controlador);
 		senales = new UIsignal(this.controlador);
+		mapa = new Mapa(this.controlador);
+		crearPanelPrincipal();
+		trains.setVisible(true);
 	}
 	
-	public JPanel crearPanelPrincipal()
-	{
-		panelPrincipal = new JPanel(new BorderLayout());
-		panelIzquierdo = new JPanel(new CardLayout());
-		panelDerecho = new Mapa(controlador);
+	public void crearPanelPrincipal() {
+		Container contentPane = getContentPane();
 		
-		//Creamos paneles lado Izquierdo
+        final JPanel cp = new JPanel();
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+		final JComboBox c = new JComboBox(vectorCadena);
+        c.setEditable(false);
+        c.addItemListener(this);
+        cp.add(c,FlowLayout.LEFT);
+        contentPane.add(cp,BorderLayout.NORTH);
+   ////////////////////////////////////////
+        JPanel p1 = new JPanel(new FlowLayout());
+        JButton start = new JButton();
+        start.setIcon(createImageIcon("images/start.png"));
+        start.setToolTipText("Start");
 		
-		panelIzquierdo.add(crearPanel(Color.red, 300,600),"pVacio");
-		panelIzquierdo.add(cargarPanelTrenes(appTrenes),"pTrenes");
-		panelIzquierdo.add(cargarPanelSenales(senales),"pSenales");
-		
-		//Aï¿½adimos paneles al principal
-		
-		panelPrincipal.add(panelIzquierdo,BorderLayout.LINE_START);
-		panelPrincipal.add(panelDerecho,BorderLayout.CENTER);
-		
-		barraMenu.opcionTrenes.addActionListener(this);
-		barraMenu.opcionSenales.addActionListener(this);
-		barraMenu.opcionPagPrincipal.addActionListener(this);
-		
-		return panelPrincipal;
-	}
-	
-	public JPanel cargarPanelTrenes(Trenes trenes)
-	{
-		JPanel panel = new JPanel();
-		panel = trenes.crearPreferenciaTrenes();
-		panel.setBorder(this.borde);
-		
-		return panel;
-	}
-	
-	public JPanel cargarPanelSenales(UIsignal senales)
-	{
-		JPanel panel = new JPanel();
-		panel = senales;
-		panel.setBorder(this.borde);
-
-		return panel;
-	}
-	
-	public void crearYMostrarGUI() {
-		JFrame frame = new JFrame("Interfaz IS");
-		Principal principal = new Principal(controlador);
-		
-		frame.setContentPane(principal.crearPanelPrincipal());
-		frame.setJMenuBar(principal.barraMenu.crearBarraMenu());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1000,700);
-		frame.setMinimumSize(new Dimension(1000,700));
-		frame.pack();
-		frame.setVisible(true);
-	} 
-	
-	public JPanel crearPanel(Color color, int x, int y) {
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(x, y));
-		panel.setBackground(color);
-		panel.setBorder(this.borde);
-		return panel;
-	}
-	
-	public void actionPerformed(ActionEvent e) {
-		CardLayout cl = (CardLayout) (panelIzquierdo.getLayout());
-		if(e.getSource() == barraMenu.opcionTrenes)
-		{
-			cl.show(panelIzquierdo, "pTrenes");
-		}
-		else if(e.getSource() == barraMenu.opcionSenales)
-		{
-			cl.show(panelIzquierdo, "pSenales");
-		}
-		else if(e.getSource() == barraMenu.opcionPagPrincipal)
-		{
-			cl.show(panelIzquierdo, "pVacio");
-		}
-	}
-	
-	/*public static void main(String [] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				crearYMostrarGUI();
+        JButton quit = new JButton();
+        quit.setIcon(createImageIcon("images/salir.png"));
+        quit.setToolTipText("Quit");
+        
+        start.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
 				
+				new Thread (new Runnable() {
+							@SuppressWarnings("static-access")
+							@Override
+							public void run() {
+								modeStart();
+								int cont=0;
+								EstadoSenal c;
+								while(!controlador.start()){
+									cont++;
+									if(cont==8){
+										cont=0;
+										ArrayList<Senal> s = controlador.getSenales();
+										for(int j = 0; j< s.size(); j++){
+											s.get(j).setEstado();
+											c = s.get(j).getEstado();
+											if(c == c.ROJO)
+											controlador.getEstadoMundo()[s.get(j).getCoordenada().getCoordenadaX()][s.get(j).getCoordenada().getCoordenadaY()]= 'r';
+											else
+												controlador.getEstadoMundo()[s.get(j).getCoordenada().getCoordenadaX()][s.get(j).getCoordenada().getCoordenadaY()]= 'v';
+										}
+									}
+									actualizarMapa();
+									try {
+										Thread.sleep(300);
+									} catch (InterruptedException e) {
+									}
+								}
+								JOptionPane.showMessageDialog(null, new JLabel("Fin de la Simulación"));
+								System.exit(0);
+							}
+						
+					}).start();
 			}
 		});
-	}*/
+        quit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+			}
+		});
+
+
+        cards = new JPanel();
+        cards.setLayout(new CardLayout());
+        
+        
+        p1.add(start,BorderLayout.PAGE_START); 
+        p1.add(quit,BorderLayout.PAGE_END);
+       
+   /////////////////////////////////////////////
+        JPanel p2 = new JPanel();
+        p2.add(trains);
+   ///////////////////////////////////////////////    
+        JPanel p3 = new JPanel();
+        p3.add(senales);
+   ////////////////////////////////////////////////
+
+        cards.add("Principal", p1);
+        cards.add("Trenes", p2);
+        cards.add("Señales", p3);
+        contentPane.add(cards, BorderLayout.LINE_START);
+        contentPane.add(mapa, BorderLayout.CENTER);
+        
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.pack();
+		this.setVisible(true);        
+    }
+
+    protected JFrame modeStart() {
+		// TODO Auto-generated method stub
+    	JFrame modeStart = new JFrame();
+    	Container contenido=modeStart.getContentPane();
+    	
+    	JButton hola = new JButton("HHHHHH");
+    	contenido.add(mapa);
+    	add(hola);
+    	
+    	modeStart.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    	modeStart.pack();
+    	modeStart.setVisible(true); 
+    	
+    	return modeStart;
+	}
+
+	public void itemStateChanged(final ItemEvent evt) {
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+		        CardLayout cl = (CardLayout)(cards.getLayout());
+		        cl.show(cards, (String)evt.getItem());
+			}
+		});
+
+    }
+    
+	private static ImageIcon createImageIcon(String image){
+		java.net.URL imgURL = Principal.class.getResource(image);
+		if (imgURL != null) return new ImageIcon(imgURL);
+		return null;
+	}
+	public static void actualizarMapa(){
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				mapa.updateView();	
+			}
+		});
+		
+	}
+	
 }

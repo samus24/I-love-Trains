@@ -1,8 +1,7 @@
 package Utiles;
 
 public class Constantes {
-
-	public static final int MAX_TRENES = 10;
-	public static final int MAX_SENALES =30;
+	public static final int DIMENSION_MAPA_X=60;
+	public static final int DIMENSION_MAPA_Y=60;
 	public static final String NOMBRE_ARCHIVO = "mapa.txt";
 }

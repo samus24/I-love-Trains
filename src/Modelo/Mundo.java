@@ -4,19 +4,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import javax.swing.JTextArea;
 import Utiles.Constantes;
 import Utiles.Lector;
-/**
-	Corrección por Ignacio Rocillo
-	
-*/
 
 public class Mundo {
 	private ArrayList<Senal> senales;
-	private ArrayList<Tren> trenes ;
+	private ArrayList<Tren> trenes;
 	private char[][] estadoMundo;
-	private static final  int DIM = 60; 
 	public Mundo(){
 		trenes = new ArrayList<Tren>();
 		senales =  new ArrayList<Senal>();
@@ -67,6 +61,7 @@ public class Mundo {
 	
 	public void setTren(Tren tren) {
 		trenes.add(tren);
+
 	}
 	
 	public char[][] getEstadoMundo() {
@@ -80,48 +75,94 @@ public class Mundo {
 	public void anadirSenal(Coordenada posicion, EstadoSenal estado) {
 		// TODO Auto-generated method stub
 		this.senales.add(new Senal(posicion, estado));
+		estadoMundo[posicion.getCoordenadaX()][posicion.getCoordenadaY()]='r';
 	}
-	public void eliminarSenal(Senal del){
-		this.senales.remove(del);
+	public void eliminarSenal(int id,Coordenada c){
+		this.senales.remove(this.senales.get(id));
+		estadoMundo[c.getCoordenadaX()][c.getCoordenadaY()]='*';
 	}
 	public void eliminarTren(int id) {
 		// TODO Auto-generated method stub
-		this.trenes.remove(id);
+		Tren e=this.trenes.get(id);
+
+		estadoMundo[e.getCoordenadaInicio().getCoordenadaX()][e.getCoordenadaInicio().getCoordenadaY()]='c';
+		switch (e.getTrayecto()) {
+		case HorizontalDerecha:
+				for(int i=1; i <= e.getVagones(); i++)
+					estadoMundo[e.getCoordenadaInicio().getCoordenadaX()][e.getCoordenadaInicio().getCoordenadaY()-i]='c';
+			break;
+		case HorizontalIzquierda:
+				for(int i=1; i <= e.getVagones(); i++)
+					estadoMundo[e.getCoordenadaInicio().getCoordenadaX()][e.getCoordenadaInicio().getCoordenadaY()+i]='c';
+			break;
+		case VerticalAbajo:
+				for(int i=1; i <= e.getVagones(); i++)
+					estadoMundo[e.getCoordenadaInicio().getCoordenadaX()-i][e.getCoordenadaInicio().getCoordenadaY()]='c';
+			break;
+		case VerticalArriba:
+				for(int i=1; i <= e.getVagones(); i++)
+					estadoMundo[e.getCoordenadaInicio().getCoordenadaX()+i][e.getCoordenadaInicio().getCoordenadaY()]='c';				
+			break;
+		}
+		this.trenes.remove(e);
 	}
 
-	public void modificarTren(int id, int numVagones,Trayecto trayecto) {
+	public void modificarTren(int id, int numVagones) {
 		// TODO Auto-generated method stub
-		try {
-			this.trenes.get(id).setVagones(numVagones,trayecto);
-			
-		} catch (IndexOutOfBoundsException e) {
-			System.err.println("Error: No existe ese tren.");
+		Tren e=this.trenes.get(id);
+		e.setVagones(numVagones);
+		estadoMundo[e.getCoordenadaInicio().getCoordenadaX()][e.getCoordenadaInicio().getCoordenadaY()]='l';
+		Coordenada c=e.getCoordenadaInicio();
+		switch (e.getTrayecto()) {
+		case HorizontalDerecha:
+				for(int i=1; i <= numVagones; i++)
+					estadoMundo[c.getCoordenadaX()][c.getCoordenadaY()-i]='t';
+			break;
+		case HorizontalIzquierda:
+				for(int i=1; i <= numVagones; i++)
+					estadoMundo[c.getCoordenadaX()][c.getCoordenadaY()+i]='t';
+			break;
+		case VerticalAbajo:
+				for(int i=1; i <= numVagones; i++)
+					estadoMundo[c.getCoordenadaX()-i][c.getCoordenadaY()]='t';
+			break;
+		case VerticalArriba:
+				for(int i=1; i <= numVagones; i++)
+					estadoMundo[c.getCoordenadaX()+i][c.getCoordenadaY()]='t';				
+			break;
 		}
+		
+		
 	}
 
 	public void anadirTren(int numVagones,Coordenada c,Trayecto trayecto) {
 		// TODO Auto-generated method stub		
 		this.trenes.add(new Tren(c,trayecto,numVagones));
+		estadoMundo[c.getCoordenadaX()][c.getCoordenadaY()]='l';
+			switch (trayecto) {
+			case HorizontalDerecha:
+					for(int i=1; i <= numVagones; i++)
+						estadoMundo[c.getCoordenadaX()][c.getCoordenadaY()-i]='t';
+				break;
+			case HorizontalIzquierda:
+					for(int i=1; i <= numVagones; i++)
+						estadoMundo[c.getCoordenadaX()][c.getCoordenadaY()+i]='t';
+				break;
+			case VerticalAbajo:
+					for(int i=1; i <= numVagones; i++)
+						estadoMundo[c.getCoordenadaX()-i][c.getCoordenadaY()]='t';
+				break;
+			case VerticalArriba:
+					for(int i=1; i <= numVagones; i++)
+						estadoMundo[c.getCoordenadaX()+i][c.getCoordenadaY()]='t';				
+				break;
+			}
 	}
-
-	public JTextArea mostrarMapa() {
-		// TODO Auto-generated method stub
-	    /* * */JTextArea texto = new JTextArea();
-        /* * */StringBuilder contenido = new StringBuilder();
-        for(int i = 0; i < DIM; i++){
-            for(int j = 0; j < DIM; j++){
-                if(estadoMundo[j][i] == '*')//Columnas extrapoladas, se han corregido (antes era [i][j]
-                    //System.out.print(" ");
-                    /* * */contenido.append(" ");    
-                else
-                    //System.out.print(estadoMundo[i][j]);
-                    /* * */contenido.append(estadoMundo[j][i]);                
-            }
-            //System.out.println("");
-            /* * */contenido.append('\n');
-        }
-        /* * */texto.setText(contenido.toString());
-        /* * */return texto;
+	public void modificarSenal(int id, Coordenada c) {
+		this.senales.get(id).setEstado();
+		if(this.senales.get(id).getEstado() == EstadoSenal.ROJO)
+			estadoMundo[c.getCoordenadaX()][c.getCoordenadaY()]='r';
+		else
+			estadoMundo[c.getCoordenadaX()][c.getCoordenadaY()]='v';
 	}
-	
 }

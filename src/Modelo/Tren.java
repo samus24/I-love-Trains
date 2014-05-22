@@ -28,8 +28,8 @@ public class Tren{
 	public int  getVagones(){		
 		return numVagones;
 	}
-	public String getTrayecto(){
-		return trayecto.toString();
+	public Trayecto getTrayecto(){
+		return trayecto;
 	}
 	public Coordenada getCoordenadaInicio(){
 		return coordenadaInicio;
@@ -52,18 +52,17 @@ public class Tren{
 		}
 		if(!enc){
 			switch(trayecto){
-			case HorizontalDer: coordenadaActual.setX(coordenadaActual.getCoordenadaX() + 1);break;
-			case HorizontalIzq: coordenadaActual.setX(coordenadaActual.getCoordenadaX() - 1);break;
-			case VerticalArr:coordenadaActual.setY(coordenadaActual.getCoordenadaY() + 1);break;
-			case VerticalAba:coordenadaActual.setY(coordenadaActual.getCoordenadaY() - 1);
+			case HorizontalDerecha: coordenadaActual.setX(coordenadaActual.getCoordenadaX() + 1);break;
+			case HorizontalIzquierda: coordenadaActual.setX(coordenadaActual.getCoordenadaX() - 1);break;
+			case VerticalArriba:coordenadaActual.setY(coordenadaActual.getCoordenadaY() + 1);break;
+			case VerticalAbajo:coordenadaActual.setY(coordenadaActual.getCoordenadaY() - 1);
 			}
 		}
 		
 	}
 
-	public void setVagones(int numVagones,Trayecto trayecto) {
+	public void setVagones(int numVagones) {
 		// TODO Auto-generated method stub
 		this.numVagones=numVagones;
-		this.trayecto=trayecto;
 	}
 }
