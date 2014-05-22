@@ -334,42 +334,42 @@ public class Trenes extends JPanel{
 						}catch(NumberFormatException e2){
 							JOptionPane.showMessageDialog(null, new JTextArea("Has introducido una cadena en el campo vagones"));
 							correcto=false;
-						}		
-						char[][] mundo = controlador.getEstadoMundo();
-						if(numeroVagones + c.getCoordenadaX() > Constantes.DIMENSION_MAPA_X || c.getCoordenadaX() - numeroVagones< 0   
-								|| numeroVagones + c.getCoordenadaY() > Constantes.DIMENSION_MAPA_Y ||  c.getCoordenadaY() - numeroVagones  < 0)
-							correctoC=false;
-						System.out.println("hola");
-						if(correctoC && mundo[c.getCoordenadaX()][c.getCoordenadaY()] != 'c' ) correctoC=false;
-						if(correctoC){
-							for(int i = numeroVagones; i>0 && correcto; i--){
-								switch (anyadirTrayecto) {
-								case HorizontalDerecha:
-									if(mundo[c.getCoordenadaX()][c.getCoordenadaY()-i] != 'c') correctoC=false;
+						}
+						if(correcto){
+							char[][] mundo = controlador.getEstadoMundo();
+							if(numeroVagones + c.getCoordenadaX() > Constantes.DIMENSION_MAPA_X || c.getCoordenadaX() - numeroVagones< 0   
+									|| numeroVagones + c.getCoordenadaY() > Constantes.DIMENSION_MAPA_Y ||  c.getCoordenadaY() - numeroVagones  < 0)
+								correctoC=false;
+							if(correctoC && mundo[c.getCoordenadaX()][c.getCoordenadaY()] != 'c' ) correctoC=false;
+							if(correctoC){
+								for(int i = numeroVagones; i>0 && correcto; i--){
+									switch (anyadirTrayecto) {
+									case HorizontalDerecha:
+										if(mundo[c.getCoordenadaX()][c.getCoordenadaY()-i] != 'c') correctoC=false;
 
 
-									break;
-								case HorizontalIzquierda:
-									if(mundo[c.getCoordenadaX()][c.getCoordenadaY()+i] != 'c') correctoC=false;	
+										break;
+									case HorizontalIzquierda:
+										if(mundo[c.getCoordenadaX()][c.getCoordenadaY()+i] != 'c') correctoC=false;	
 
-									break;
-								case VerticalAbajo:
-									if(mundo[c.getCoordenadaX()-i][c.getCoordenadaY()] != 'c') correctoC=false;	
+										break;
+									case VerticalAbajo:
+										if(mundo[c.getCoordenadaX()-i][c.getCoordenadaY()] != 'c') correctoC=false;	
 
-									break;
-								case VerticalArriba:
-									if(mundo[c.getCoordenadaX()+i][c.getCoordenadaY()] != 'c') correctoC=false;
+										break;
+									case VerticalArriba:
+										if(mundo[c.getCoordenadaX()+i][c.getCoordenadaY()] != 'c') correctoC=false;
 
-									break;
+										break;
 
 
-								default:
-									correctoC=false;
-									break;
-								}			
+									default:
+										correctoC=false;
+										break;
+									}			
+								}
 							}
 						}
-
 
 						if(correcto && correctoC){
 							controlador.crearTren(numeroVagones, c, anyadirTrayecto);
