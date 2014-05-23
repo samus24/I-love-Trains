@@ -24,7 +24,6 @@ public class Mundo {
 			Lector lector = new Lector();
 			estadoMundo = lector.cargarMapa(mapa,this);
 		} catch (FileNotFoundException e) {
-			System.err.println("No se ha encontrado el archivo");
 		}
 	}	
 	public void recalcularEstadoTrenes(){
@@ -32,21 +31,7 @@ public class Mundo {
 			 e.avanza(senales);
 		}
 	}
-	
-	//A dia 5/5 el grupo de diseño al completo ve incorrecto este metodo porque es la vista
-	//la que se encarga de mostrar cosas
-	
-	/*public void mostrarMapa(){
-		for(int i = 0; i < DIM; i++){
-			for(int j = 0; j < DIM; j++){
-				if(estadoMundo[i][j] == '*')
-					System.out.print(" ");
-				else System.out.print(estadoMundo[i][j]);
-			}
-			System.out.println("");
-		}
-	}*/
-	
+
 	public ArrayList<Senal> getSenales() {
 		return senales;
 	}
@@ -73,7 +58,6 @@ public class Mundo {
 	}
 
 	public void anadirSenal(Coordenada posicion, EstadoSenal estado) {
-		// TODO Auto-generated method stub
 		this.senales.add(new Senal(posicion, estado));
 		estadoMundo[posicion.getCoordenadaX()][posicion.getCoordenadaY()]='r';
 	}
@@ -82,7 +66,6 @@ public class Mundo {
 		estadoMundo[c.getCoordenadaX()][c.getCoordenadaY()]='*';
 	}
 	public void eliminarTren(int id) {
-		// TODO Auto-generated method stub
 		Tren e=this.trenes.get(id);
 
 		estadoMundo[e.getCoordenadaInicio().getCoordenadaX()][e.getCoordenadaInicio().getCoordenadaY()]='c';
@@ -108,7 +91,6 @@ public class Mundo {
 	}
 
 	public void modificarTren(int id, int numVagones) {
-		// TODO Auto-generated method stub
 		Tren e=this.trenes.get(id);
 		e.setVagones(numVagones);
 		estadoMundo[e.getCoordenadaInicio().getCoordenadaX()][e.getCoordenadaInicio().getCoordenadaY()]='l';
@@ -136,7 +118,6 @@ public class Mundo {
 	}
 
 	public void anadirTren(int numVagones,Coordenada c,Trayecto trayecto) {
-		// TODO Auto-generated method stub		
 		this.trenes.add(new Tren(c,trayecto,numVagones));
 		estadoMundo[c.getCoordenadaX()][c.getCoordenadaY()]='l';
 			switch (trayecto) {

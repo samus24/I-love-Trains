@@ -39,9 +39,7 @@ public class Mapa extends JPanel {
 
 		for(int i = 0; i < 60; i++){
 			for(int j = 0; j < 60; j++){
-				if(salida[i][j] == '*'){//Columnas extrapoladas, se han corregido (antes era [i][j]
-					//System.out.print(" ");
-					//  /* * */contenido.append("."); 
+				if(salida[i][j] == '*'){
 					mapa[i][j]=new JButton();
 					mapa[i][j].setBackground(Color.gray);					
 					mundo.add(mapa[i][j]);
@@ -51,40 +49,35 @@ public class Mapa extends JPanel {
 						mapa[i][j]=new JButton();
 						mapa[i][j].setBackground(Color.DARK_GRAY);
 						mapa[i][j].setSize(new Dimension(5,5));
-						//System.out.print(estadoMundo[i][j]);
-						/* * */mundo.add(mapa[i][j]);
+						mundo.add(mapa[i][j]);
 					}else
 						if(salida[i][j] == 't'){
 
 							mapa[i][j]=new JButton();
 							mapa[i][j].setBackground(Color.YELLOW);
 							mapa[i][j].setSize(new Dimension(5,5));
-							//System.out.print(estadoMundo[i][j]);
-							/* * */mundo.add(mapa[i][j]);
+							mundo.add(mapa[i][j]);
 						}else
 							if(salida[i][j] == 'l'){
 
 								mapa[i][j]=new JButton();
 								mapa[i][j].setBackground(Color.CYAN);
 								mapa[i][j].setSize(new Dimension(5,5));
-								//System.out.print(estadoMundo[i][j]);
-								/* * */mundo.add(mapa[i][j]);
+								mundo.add(mapa[i][j]);
 							}else
 								if(salida[i][j] == 'r'){
 
 									mapa[i][j]=new JButton();
 									mapa[i][j].setBackground(Color.RED);
 									mapa[i][j].setSize(new Dimension(5,5));
-									//System.out.print(estadoMundo[i][j]);
-									/* * */mundo.add(mapa[i][j]);
+									mundo.add(mapa[i][j]);
 								}else
 									if(salida[i][j] == 'v'){
 
 										mapa[i][j]=new JButton();
 										mapa[i][j].setBackground(Color.GREEN);
 										mapa[i][j].setSize(new Dimension(5,5));
-										//System.out.print(estadoMundo[i][j]);
-										/* * */mundo.add(mapa[i][j]);
+										mundo.add(mapa[i][j]);
 									}
 									else
 										if(salida[i][j] == 'i'){
@@ -92,45 +85,35 @@ public class Mapa extends JPanel {
 											mapa[i][j]=new JButton();
 											mapa[i][j].setBackground(Color.pink);
 											mapa[i][j].setSize(new Dimension(5,5));
-											//System.out.print(estadoMundo[i][j]);
-											/* * */mundo.add(mapa[i][j]);
+											mundo.add(mapa[i][j]);
 										}else
 											if(salida[i][j] == 'f'){
 
 												mapa[i][j]=new JButton();
 												mapa[i][j].setBackground(Color.pink);
 												mapa[i][j].setSize(new Dimension(5,5));
-												//System.out.print(estadoMundo[i][j]);
-												/* * */mundo.add(mapa[i][j]);
+												mundo.add(mapa[i][j]);
 											}
 				}
 				mapa[i][j].setToolTipText(Integer.toString(j) + " , " + Integer.toString(i));
 			}
 
 		}
-
-
-
-
-		//		salida.setFont(new Font("Courier", Font.PLAIN, 16));
-		//		salida.setEditable(false);
 		JScrollPane panel = new JScrollPane(mundo);
 
 		this.add(panel);
 	}
 
 	public void updateView() {
-		// TODO Auto-generated method stub
 		salida = contr.getEstadoMundo();
 
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
-				///////////////////////////////////////////////////////////////////////////////////////
 				for(int i = 0; i < 60; i++){
 					for(int j = 0; j < 60; j++){
-						if(salida[i][j] == '*'){//Columnas extrapoladas, se han corregido (antes era [i][j]
+						if(salida[i][j] == '*'){
 							mapa[i][j].setBackground(Color.gray);
 						}
 						else{
@@ -161,7 +144,6 @@ public class Mapa extends JPanel {
 						}
 					}
 				}
-				///////////////////////////////////////////////////////////////////////////////////
 			}
 		});
 

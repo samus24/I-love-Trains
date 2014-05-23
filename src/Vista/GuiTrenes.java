@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -18,7 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -30,14 +30,14 @@ import Utiles.Constantes;
 
 
 @SuppressWarnings("serial")
-public class Trenes extends JPanel{
+public class GuiTrenes extends JPanel{
 	private Controlador controlador;
 	private JTable tabla;
 	private TablaTrenes datosTrenes;
 	private int filaSeleccionada;
 
 
-	public Trenes(Controlador controlador) {
+	public GuiTrenes(Controlador controlador) {
 		this.controlador = controlador;
 		this.filaSeleccionada=-1;
 		crearVista();
@@ -63,7 +63,6 @@ public class Trenes extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				mostrarNuevoFormulario();
 			}
 		});
@@ -72,24 +71,22 @@ public class Trenes extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(filaSeleccionada != -1){
 					mostrarModificarFormulario();
 				}
 				else
-					JOptionPane.showMessageDialog(null, new JTextArea("No has seleccionado ninguna fila"));
+					JOptionPane.showMessageDialog(null, "No has seleccionado ninguna fila");
 			}
 		});
 		eliminar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(filaSeleccionada != -1){
 					mostrarEliminarFormulario();
 				}
 				else
-					JOptionPane.showMessageDialog(null, new JTextArea("No has seleccionado ninguna fila"));
+					JOptionPane.showMessageDialog(null, "No has seleccionado ninguna fila");
 			}
 		});
 
@@ -129,17 +126,15 @@ public class Trenes extends JPanel{
 	}
 
 	public void mostrarEliminarFormulario() {
-		// TODO Auto-generated method stub
 		final JDialog dialog = new JDialog();
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				dialog.setTitle("Eliminar Tren");
 				dialog.setVisible(true);
 				dialog.setLocation(400, 230);
-				dialog.setPreferredSize(new java.awt.Dimension(400, 300));
+				dialog.setPreferredSize(new java.awt.Dimension(200, 215));
 				dialog.setLayout(new FlowLayout());
 				dialog.pack();
 				JLabel id = new JLabel("¿Eliminar tren con id: ("+ filaSeleccionada+ ") ?");
@@ -149,8 +144,7 @@ public class Trenes extends JPanel{
 				ok.addActionListener(new ActionListener() {
 
 					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						// TODO Auto-generated method stub				
+					public void actionPerformed(ActionEvent arg0) {			
 						controlador.eliminarTren(filaSeleccionada);
 						updateView();
 						Principal.actualizarMapa();
@@ -159,38 +153,39 @@ public class Trenes extends JPanel{
 					}
 				});
 
+				ImageIcon icon = new ImageIcon("src/Vista/images/eliminar.png");
+				JLabel image = new JLabel(icon);
 
 				JButton cancel = new JButton("Cancelar");
 				cancel.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						// TODO Auto-generated method stub
 						dialog.setVisible(false);
 					}
 				});
+				dialog.add(image);
 				dialog.add(id);
 				dialog.add(ok);
 				dialog.add(cancel);
+
 			}
 		});
 
 	}
 
 	public void mostrarModificarFormulario() {
-		// TODO Auto-generated method stub
 		final JDialog dialog = new JDialog();
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@SuppressWarnings("unchecked")
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				final Tren modTren= controlador.getTrenes().get(filaSeleccionada);
 				dialog.setTitle("Modificar Tren");
 				dialog.setVisible(true);
 				dialog.setLocation(400, 230);
-				dialog.setPreferredSize(new java.awt.Dimension(400, 300));
+				dialog.setPreferredSize(new java.awt.Dimension(400, 230));
 				dialog.setLayout(new FlowLayout());
 				dialog.pack();
 
@@ -234,7 +229,7 @@ public class Trenes extends JPanel{
 							Principal.actualizarMapa();
 
 						}catch(NumberFormatException e2){
-							JOptionPane.showMessageDialog(null, new JTextArea("Has introducido una cadena en el campo vagones"));
+							JOptionPane.showMessageDialog(null,"Has introducido una cadena en el campo vagones");
 						}
 					}
 				});
@@ -245,7 +240,8 @@ public class Trenes extends JPanel{
 					}
 				});
 
-
+				ImageIcon icon = new ImageIcon("src/Vista/images/modificar.png");
+				JLabel image = new JLabel(icon);
 
 
 				dialog.add(id);
@@ -259,6 +255,7 @@ public class Trenes extends JPanel{
 				dialog.add(nVagones);
 				dialog.add(ok);
 				dialog.add(cancel);
+				dialog.add(image);
 				filaSeleccionada=-1;
 			}
 		});
@@ -266,18 +263,16 @@ public class Trenes extends JPanel{
 	}
 
 	public void mostrarNuevoFormulario() {
-		// TODO Auto-generated method stub
 		final JDialog dialog = new JDialog();
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				dialog.setTitle("Nuevo Tren");
 				dialog.setVisible(true);
 				dialog.setLocation(400, 230);
-				dialog.setPreferredSize(new java.awt.Dimension(400, 300));
+				dialog.setPreferredSize(new java.awt.Dimension(400, 270));
 				dialog.setLayout(new FlowLayout());
 				dialog.pack();
 
@@ -314,7 +309,7 @@ public class Trenes extends JPanel{
 						try{
 							c = new Coordenada(Integer.parseInt(y.getText()), Integer.parseInt(x.getText()));
 						}catch(NumberFormatException e1){
-							JOptionPane.showMessageDialog(null, new JTextArea("Has introducido una cadena en el campo coordenada"));
+							JOptionPane.showMessageDialog(null, "Has introducido una cadena en el campo coordenada");
 							correcto=false;
 						}
 
@@ -325,14 +320,14 @@ public class Trenes extends JPanel{
 						case "Vertical-Abajo":anyadirTrayecto=Trayecto.VerticalAbajo;break;
 						case "Vertical-Arriba":anyadirTrayecto=Trayecto.VerticalArriba;break;
 
-						default:JOptionPane.showMessageDialog(null, new JTextArea("Selecciona un trayecto.!"));
+						default:JOptionPane.showMessageDialog(null,"Selecciona un trayecto.!");
 						correcto=false;	break;
 						}
 						Integer numeroVagones=null;
 						try{
 							numeroVagones= Integer.parseInt(nVagones.getText());
 						}catch(NumberFormatException e2){
-							JOptionPane.showMessageDialog(null, new JTextArea("Has introducido una cadena en el campo vagones"));
+							JOptionPane.showMessageDialog(null,"Has introducido una cadena en el campo vagones");
 							correcto=false;
 						}
 						if(correcto){
@@ -379,7 +374,7 @@ public class Trenes extends JPanel{
 						}
 
 						else if(!correctoC) {
-							JOptionPane.showMessageDialog(null, new JTextArea("El tren debe estar en una via"));
+							JOptionPane.showMessageDialog(null,"El tren debe estar en una via");
 						}
 
 					}
@@ -391,8 +386,8 @@ public class Trenes extends JPanel{
 					}
 				});
 
-
-
+				ImageIcon icon = new ImageIcon("src/Vista/images/crear.png");
+				JLabel image = new JLabel(icon);				
 
 				dialog.add(id);
 				dialog.add(idText);
@@ -405,6 +400,7 @@ public class Trenes extends JPanel{
 				dialog.add(nVagones);
 				dialog.add(ok);
 				dialog.add(cancel);
+				dialog.add(image);
 			}
 		});		
 
@@ -418,7 +414,6 @@ public class Trenes extends JPanel{
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				datosTrenes.refresh(controlador.getTrenes());
 			}
 		});

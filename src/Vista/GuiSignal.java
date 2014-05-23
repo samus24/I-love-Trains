@@ -7,7 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -15,7 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -25,14 +26,14 @@ import Modelo.EstadoSenal;
 import Modelo.Senal;
 
 @SuppressWarnings("serial")
-public class UIsignal extends JPanel {
+public class GuiSignal extends JPanel {
 	private Controlador controlador;
 	/////////////////////////////////////////////
 	private JTable tabla;
 	private TablaSenales datosSenales;
 	private int filaSeleccionada;
 
-	public UIsignal(Controlador controlador) {
+	public GuiSignal(Controlador controlador) {
 		this.filaSeleccionada=-1;
 		this.controlador=controlador;
 		crearVista();
@@ -40,7 +41,6 @@ public class UIsignal extends JPanel {
 
 
 	private void crearVista() {
-		// TODO Auto-generated method stub
 
 		JButton anyadir= new JButton("Nuevo");
 		JButton cambiar= new JButton("Cambiar");
@@ -66,7 +66,6 @@ public class UIsignal extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				mostrarNuevoFormulario();
 			}
 		});
@@ -75,7 +74,6 @@ public class UIsignal extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				mostrarCambiarFormulario();
 			}
 		});
@@ -84,7 +82,6 @@ public class UIsignal extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				mostrarEliminarFormulario();
 			}
 		});
@@ -123,28 +120,30 @@ public class UIsignal extends JPanel {
 
 
 	protected void mostrarEliminarFormulario() {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
 		final JDialog dialog = new JDialog();
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
+				if(filaSeleccionada == -1){
+					JOptionPane.showMessageDialog(null, "Error al eliminar, ninguna fila seleccionada");
+					
+				}
+				else{
 				dialog.setTitle("Eliminar Señal");
 				dialog.setVisible(true);
 				dialog.setLocation(400, 230);
-				dialog.setPreferredSize(new java.awt.Dimension(400, 300));
+				dialog.setPreferredSize(new java.awt.Dimension(200, 215));
 				dialog.setLayout(new FlowLayout());
 				dialog.pack();
+				
 				JLabel id = new JLabel("¿Eliminar Senal con id: ("+ filaSeleccionada+ ") ?");
 				final Senal mod=controlador.getSenales().get(filaSeleccionada);
 				JButton ok = new JButton("Aceptar");
 				ok.addActionListener(new ActionListener() {
 
 					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						// TODO Auto-generated method stub				
+					public void actionPerformed(ActionEvent arg0) {			
 						controlador.eliminarSenal(filaSeleccionada,mod.getCoordenada());
 						updateView();
 						Principal.actualizarMapa();
@@ -158,13 +157,18 @@ public class UIsignal extends JPanel {
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						// TODO Auto-generated method stub
 						dialog.setVisible(false);
 					}
 				});
+				
+				ImageIcon icon = new ImageIcon("src/Vista/images/eliminar.png");
+				JLabel image = new JLabel(icon);
+				
 				dialog.add(id);
 				dialog.add(ok);
 				dialog.add(cancel);
+				dialog.add(image);
+			}
 			}
 		});	
 
@@ -172,18 +176,21 @@ public class UIsignal extends JPanel {
 
 
 	protected void mostrarCambiarFormulario() {
-		// TODO Auto-generated method stub
 		final JDialog dialog = new JDialog();
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
-				dialog.setTitle("Nuevo Tren");
+				if(filaSeleccionada == -1){
+					JOptionPane.showMessageDialog(null, "No has seleccionado ninguna fila");
+					
+				}
+				else{
+				dialog.setTitle("Modificar senal");
 				dialog.setVisible(true);
 				dialog.setLocation(400, 230);
-				dialog.setPreferredSize(new java.awt.Dimension(400, 300));
+				dialog.setPreferredSize(new java.awt.Dimension(300, 270));
 				dialog.setLayout(new FlowLayout());
 				dialog.pack();
 
@@ -220,7 +227,7 @@ public class UIsignal extends JPanel {
 							Principal.actualizarMapa();
 							dialog.setVisible(false);
 						}catch(NumberFormatException e1){
-							JOptionPane.showMessageDialog(null, new JTextArea("Has introducido una cadena en el campo coordenada"));
+							JOptionPane.showMessageDialog(null,"Has introducido una cadena en el campo coordenada");
 						}
 					}
 				});
@@ -230,93 +237,100 @@ public class UIsignal extends JPanel {
 						dialog.setVisible(false);
 					}
 				});
+				
+				ImageIcon icon = new ImageIcon("src/Vista/images/modificar.png");
+				JLabel image = new JLabel(icon);
+				
 				dialog.add(titulo);
 				dialog.add(id);
 				dialog.add(coordenada);
 				dialog.add(xl);dialog.add(x);
 				dialog.add(yl);dialog.add(y);
 				dialog.add(estadoLabel);dialog.add(estado);
+				dialog.add(image);
 				dialog.add(ok);
-				dialog.add(cancel);		
+				dialog.add(cancel);	
+			
+			}
 			}
 		});
-		
+
 	}
 
 
 	protected void mostrarNuevoFormulario() {
-		// TODO Auto-generated method stub
 		final JDialog dialog = new JDialog();
-SwingUtilities.invokeLater(new Runnable() {
-	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		dialog.setTitle("Nueva señal");
-		dialog.setVisible(true);
-		dialog.setLocation(400, 230);
-		dialog.setPreferredSize(new java.awt.Dimension(400, 300));
-		dialog.setLayout(new FlowLayout());
-		dialog.pack();
+		SwingUtilities.invokeLater(new Runnable() {
 
-		JLabel id = new JLabel("Id: ");
-		JTextField idText = new JTextField(10);		
-		idText.setText(""+controlador.getSenales().size());
-		idText.setEditable(false);
+			@Override
+			public void run() {
+				dialog.setTitle("Nueva señal");
+				dialog.setVisible(true);
+				dialog.setLocation(400, 230);
+				dialog.setPreferredSize(new java.awt.Dimension(600, 270));
+				dialog.setLayout(new FlowLayout());
+				dialog.pack();
 
-		JLabel coordenada = new JLabel("Coordenada: ");
-		JLabel xl = new JLabel("x: ");
-		final JTextField x = new JTextField(5);
-		JLabel yl = new JLabel("y: ");
-		final JTextField y = new JTextField(5);	
+				JLabel id = new JLabel("Id: ");
+				JTextField idText = new JTextField(10);		
+				idText.setText(""+controlador.getSenales().size());
+				idText.setEditable(false);
 
-		JLabel estadoLabel = new JLabel("Estado: ");
-		final JTextField estado = new JTextField(5);
-		estado.setText("ROJO"); //por defecto
-		estado.setEditable(false);
+				JLabel coordenada = new JLabel("Coordenada: ");
+				JLabel xl = new JLabel("x: ");
+				final JTextField x = new JTextField(5);
+				JLabel yl = new JLabel("y: ");
+				final JTextField y = new JTextField(5);	
+
+				JLabel estadoLabel = new JLabel("Estado: ");
+				final JTextField estado = new JTextField(5);
+				estado.setText("ROJO");
+				estado.setEditable(false);
 
 
-		JButton ok = new JButton("Crear");
-		ok.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try{
-					Coordenada c = new Coordenada(Integer.parseInt(y.getText()), Integer.parseInt(x.getText()));
-					controlador.anadirSenal(c, EstadoSenal.ROJO);
-					Principal.actualizarMapa();
-					updateView();
-					dialog.setVisible(false);
-				}catch(NumberFormatException e1){
-					JOptionPane.showMessageDialog(null, new JTextArea("Has introducido una cadena en el campo coordenada"));
-				}
+				JButton ok = new JButton("Crear");
+				ok.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try{
+							Coordenada c = new Coordenada(Integer.parseInt(y.getText()), Integer.parseInt(x.getText()));
+							controlador.anadirSenal(c, EstadoSenal.ROJO);
+							Principal.actualizarMapa();
+							updateView();
+							dialog.setVisible(false);
+						}catch(NumberFormatException e1){
+							JOptionPane.showMessageDialog(null, "Has introducido una cadena en el campo coordenada");
+						}
+					}
+				});
+				JButton cancel = new JButton("Cancelar");
+				cancel.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dialog.setVisible(false);
+					}
+				});
+
+				ImageIcon icon = new ImageIcon("src/Vista/images/semaforo.png");
+				JLabel image = new JLabel(icon);	
+				
+				dialog.add(image);
+				dialog.add(id);
+				dialog.add(coordenada);
+				dialog.add(xl);dialog.add(x);
+				dialog.add(yl);dialog.add(y);
+				dialog.add(estadoLabel);dialog.add(estado);
+				dialog.add(ok);
+				dialog.add(cancel);
 			}
 		});
-		JButton cancel = new JButton("Cancelar");
-		cancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dialog.setVisible(false);
-			}
-		});
 
-		dialog.add(id);
-		dialog.add(coordenada);
-		dialog.add(xl);dialog.add(x);
-		dialog.add(yl);dialog.add(y);
-		dialog.add(estadoLabel);dialog.add(estado);
-		dialog.add(ok);
-		dialog.add(cancel);
-	}
-});
-		
 	}
 
 
 	public void updateView(){
 		SwingUtilities.invokeLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
-
 				datosSenales.refresh(controlador.getSenales());
 			}
 		});
