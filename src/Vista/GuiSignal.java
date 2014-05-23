@@ -153,10 +153,8 @@ public class GuiSignal extends JPanel {
 
 
 				JButton cancel = new JButton("Cancelar");
-				ok.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
+				cancel.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
 						dialog.setVisible(false);
 					}
 				});
