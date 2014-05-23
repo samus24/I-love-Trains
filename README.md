@@ -22,4 +22,3 @@ git config --global user.email "emailQueMetisteEnTuCuentaDeGitHub@example.com"
 
 <br />
 Si tienes algo de curiosidad sobre por qué hay que poner -A en el add, puedes leer [esto] (http://stackoverflow.com/questions/572549/difference-between-git-add-a-and-git-add).  
-H.
