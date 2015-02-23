@@ -9,7 +9,7 @@ git clone https://github.com/samus24/I-love-Trains.git
 -------------  
 Para subir código al repositorio, posicionate sobre la carpeta del proyecto y ejecuta estos comandos:
 ```
-git add -A src
+git add src
 git commit -m "tu mensaje relevante"
 git push
 ```
@@ -21,4 +21,5 @@ git config --global user.email "emailQueMetisteEnTuCuentaDeGitHub@example.com"
 ```
 
 <br />
+Si tienes una versión de git anterior a 2.X en vez de hacer `git add src` debes poner `git add -A src`.
 Si tienes algo de curiosidad sobre por qué hay que poner -A en el add, puedes leer [esto] (http://stackoverflow.com/questions/572549/difference-between-git-add-a-and-git-add).  
